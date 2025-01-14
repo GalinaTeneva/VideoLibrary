@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -39,6 +41,21 @@ fun fakeMovieList(): List<Movie> {
 }
 
 @Composable
+fun MoviesList(
+    movieList: List<Movie>,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        modifier = modifier
+    ) {
+        items(movieList) { item ->
+            MovieItem(
+                movie = item)
+        }
+    }
+}
+
+@Composable
 fun MovieItem(
     movie: Movie,
     modifier: Modifier = Modifier
@@ -46,7 +63,7 @@ fun MovieItem(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(4.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
@@ -78,10 +95,18 @@ fun MovieItem(
     }
 }
 
+//@Preview(showBackground = true)
+//@Composable
+//fun MovieItemPreview() {
+//    VideoLibraryTheme {
+//        MovieItem(fakeMovieList()[0])
+//    }
+//}
+
 @Preview(showBackground = true)
 @Composable
-fun MovieItemPreview() {
+fun MovieListPreview() {
     VideoLibraryTheme {
-        MovieItem(fakeMovieList()[0])
+        MoviesList(fakeMovieList())
     }
 }
