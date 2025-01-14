@@ -1,26 +1,20 @@
 package bg.tu_varna.sit.si.video_library.ui.customer
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons.Filled
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,6 +36,21 @@ fun fakeData(): List<Customer> {
             address = "Varna, Plovdiv str."
         )
     )
+}
+
+@Composable
+fun CustomersList(
+    customersList: List<Customer>,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        modifier = modifier
+    ) {
+        items(customersList) { item ->
+            Customer(
+                customer = item)
+        }
+    }
 }
 
 @Composable
@@ -94,6 +103,14 @@ fun Customer(
                 Text(text = "Rented Movies")
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CustomersListPreview() {
+    VideoLibraryTheme {
+        CustomersList(fakeData())
     }
 }
 
