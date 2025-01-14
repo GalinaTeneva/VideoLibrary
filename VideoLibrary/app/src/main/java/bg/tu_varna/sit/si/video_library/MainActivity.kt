@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Application() {
-    //ToDo
 }
 
 //@Preview(showBackground = true)

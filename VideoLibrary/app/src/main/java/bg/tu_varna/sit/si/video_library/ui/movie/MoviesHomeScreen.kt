@@ -27,22 +27,22 @@ import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 fun fakeMovieList(): List<Movie> {
     return listOf(
-//        Movie(
-//            movieId = 1,
-//            title = "Harry Potter",
-//            genre = "Fantasy",
-//            director = "Chris Columbus",
-//            price = 3.2,
-//            quantity = 3
-//        ),
-//        Movie(
-//            movieId = 2,
-//            title = "Back to the Future",
-//            genre = "sci-fi",
-//            director = "Robert Zemeckis",
-//            price = 2.50,
-//            quantity = 4
-//        )
+        Movie(
+            movieId = 1,
+            title = "Harry Potter",
+            genre = "Fantasy",
+            director = "Chris Columbus",
+            price = 3.2,
+            quantity = 3
+        ),
+        Movie(
+            movieId = 2,
+            title = "Back to the Future",
+            genre = "sci-fi",
+            director = "Robert Zemeckis",
+            price = 2.50,
+            quantity = 4
+        )
     )
 }
 
