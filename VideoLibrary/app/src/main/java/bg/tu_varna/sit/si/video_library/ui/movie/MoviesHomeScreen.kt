@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui.home
+package bg.tu_varna.sit.si.video_library.ui.movie
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
