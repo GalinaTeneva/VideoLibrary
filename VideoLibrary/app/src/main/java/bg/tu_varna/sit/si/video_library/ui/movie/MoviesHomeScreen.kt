@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.data.entities.Movie
+import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 fun fakeMovieList(): List<Movie> {
@@ -48,7 +49,13 @@ fun fakeMovieList(): List<Movie> {
 @Composable
 fun HomeScreen(
 ) {
-    Scaffold() { innerPadding ->
+    Scaffold(
+        topBar = {
+            VideoLibraryTopAppBar(
+                title = "Movies"
+            )
+        }
+    ) { innerPadding ->
         HomeScreenBody(
             movieList = fakeMovieList(),
             modifier = Modifier.padding(innerPadding)
