@@ -27,7 +27,7 @@ interface CustomerDao {
             WHERE customerId = :id
         """
     )
-    suspend fun getCustomer(id: Int): Flow<Customer>
+    fun getCustomer(id: Int): Flow<Customer>
 
     @Query(
         """
@@ -36,5 +36,5 @@ interface CustomerDao {
             ORDER BY name ASC
         """
     )
-    suspend fun getAllCustomers(): Flow<List<Customer>>
+    fun getAllCustomers(): Flow<List<Customer>>
 }

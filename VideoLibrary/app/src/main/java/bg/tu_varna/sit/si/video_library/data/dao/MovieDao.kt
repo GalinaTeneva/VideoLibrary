@@ -27,7 +27,7 @@ interface MovieDao {
             WHERE movieId = :id
         """
     )
-    suspend fun getMovie(id: Int): Flow<Movie>
+    fun getMovie(id: Int): Flow<Movie>
 
     @Query(
         """
@@ -36,5 +36,5 @@ interface MovieDao {
             ORDER BY title ASC
         """
     )
-    suspend fun getAllMovies(): Flow<List<Movie>>
+    fun getAllMovies(): Flow<List<Movie>>
 }
