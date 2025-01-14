@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,6 +24,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.data.entities.Customer
+import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
+import bg.tu_varna.sit.si.video_library.ui.movie.fakeMovieList
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 fun fakeData(): List<Customer> {
@@ -40,6 +43,23 @@ fun fakeData(): List<Customer> {
             address = "Varna, Plovdiv str."
         )
     )
+}
+
+@Composable
+fun HomeScreen(
+) {
+    Scaffold(
+        topBar = {
+            VideoLibraryTopAppBar(
+                title = "Customers"
+            )
+        }
+    ) { innerPadding ->
+        HomeScreenBody(
+            customersList = fakeData(),
+            modifier = Modifier.padding(innerPadding)
+        )
+    }
 }
 
 @Composable
