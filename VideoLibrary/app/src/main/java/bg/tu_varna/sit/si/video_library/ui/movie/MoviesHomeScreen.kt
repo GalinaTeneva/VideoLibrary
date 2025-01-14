@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.data.entities.Movie
+import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreen
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
@@ -47,48 +48,16 @@ fun fakeMovieList(): List<Movie> {
 }
 
 @Composable
-fun HomeScreen(
+fun MovieHomeScreen(
 ) {
-    Scaffold(
-        topBar = {
-            VideoLibraryTopAppBar(
-                title = "Movies"
-            )
+    GenericHomeScreen(
+        title = "Movies",
+        itemList = fakeMovieList(),
+        emptyMessage = "Sorry!\n\nThere are no available movies.",
+        itemListContent = { movieList ->
+            MoviesList(movieList = movieList)
         }
-    ) { innerPadding ->
-        HomeScreenBody(
-            movieList = fakeMovieList(),
-            modifier = Modifier.padding(innerPadding)
-        )
-    }
-}
-
-@Composable
-fun HomeScreenBody(
-    movieList: List<Movie>,
-    modifier: Modifier = Modifier
-) {
-    if (movieList.isEmpty()) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = modifier.fillMaxSize()
-        ) {
-            Text(
-                text = "Sorry!\n\nThere are no available movies.",
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
-    } else {
-        Column(
-            modifier = modifier.fillMaxSize()
-        ) {
-            MoviesList(
-                movieList = movieList,
-                modifier = Modifier
-            )
-        }
-    }
+    )
 }
 
 @Composable
@@ -159,13 +128,5 @@ fun MovieItemPreview() {
 fun MovieListPreview() {
     VideoLibraryTheme {
         MoviesList(fakeMovieList())
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenBodyPreview() {
-    VideoLibraryTheme {
-        HomeScreenBody(fakeMovieList())
     }
 }

@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.data.entities.Customer
+import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreen
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.movie.fakeMovieList
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
@@ -46,48 +47,16 @@ fun fakeData(): List<Customer> {
 }
 
 @Composable
-fun HomeScreen(
+fun CustomerHomeScreen(
 ) {
-    Scaffold(
-        topBar = {
-            VideoLibraryTopAppBar(
-                title = "Customers"
-            )
+    GenericHomeScreen(
+        title = "Customers",
+        itemList = fakeData(),
+        emptyMessage = "Sorry!\n\nThere are no registered customers yet.",
+        itemListContent = { customersList ->
+            CustomersList(customersList = customersList)
         }
-    ) { innerPadding ->
-        HomeScreenBody(
-            customersList = fakeData(),
-            modifier = Modifier.padding(innerPadding)
-        )
-    }
-}
-
-@Composable
-fun HomeScreenBody(
-    customersList: List<Customer>,
-    modifier: Modifier = Modifier
-) {
-    if (customersList.isEmpty()) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = modifier.fillMaxSize()
-        ) {
-            Text(
-                text = "Sorry!\n\nThere are no registered customers yet.",
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
-    } else {
-        Column(
-            modifier = modifier.fillMaxSize()
-        ) {
-            CustomersList(
-                customersList = customersList,
-                modifier = Modifier
-            )
-        }
-    }
+    )
 }
 
 @Composable
@@ -155,14 +124,6 @@ fun Customer(
                 Text(text = "Rented Movies")
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenBodyPreview() {
-    VideoLibraryTheme {
-        HomeScreenBody(fakeData())
     }
 }
 
