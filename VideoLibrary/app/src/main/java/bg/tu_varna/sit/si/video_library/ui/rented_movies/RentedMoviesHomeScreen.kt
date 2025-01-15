@@ -50,7 +50,8 @@ fun fakeData(): List<RentedMovie> = listOf(
 
 @Composable
 fun RentedMoviesHomeScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onNewEntryClick: () ->Unit
 ) {
     Scaffold(
         topBar = {
@@ -68,7 +69,7 @@ fun RentedMoviesHomeScreen(
                 .padding(innerPadding)
         ) {
             Button(
-                onClick = { },
+                onClick = onNewEntryClick,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
@@ -206,7 +207,8 @@ fun RentedMovieRow(
 fun RentedMoviesHomeScreenPreview(){
     VideoLibraryTheme {
         RentedMoviesHomeScreen(
-            onBackClick = {}
+            onBackClick = {},
+            onNewEntryClick = {}
         )
     }
 }
