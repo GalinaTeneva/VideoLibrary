@@ -45,14 +45,14 @@ fun fakeMovieList(): List<Movie> {
 
 @Composable
 fun MovieHomeScreen(
-    //navigateUp: () -> Unit
+    onBackClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
                 title = "Movies",
                 showBackButton = true,
-                onBackClick = {} //TODO: Implement it!
+                onBackClick = onBackClick
             )
         }
     ) {

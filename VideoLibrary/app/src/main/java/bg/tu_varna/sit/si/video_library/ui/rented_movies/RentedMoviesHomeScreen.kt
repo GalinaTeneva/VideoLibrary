@@ -48,13 +48,14 @@ fun fakeData(): List<RentedMovie> = listOf(
 
 @Composable
 fun RentedMoviesHomeScreen(
+    onBackClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
                 title = "Rented Movies",
                 showBackButton = true,
-                onBackClick = {} //TODO: Implement it!
+                onBackClick = onBackClick
             )
         }
     ) {

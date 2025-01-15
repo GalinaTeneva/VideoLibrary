@@ -36,14 +36,18 @@ fun VideoLibraryNavHost (
         }
         composable(route = Screen.MoviesHome.route) {
             MovieHomeScreen(
-                //navigateUp = navController.navigateUp()
+                onBackClick = {navController.navigateUp()}
             )
         }
         composable(route = Screen.CustomersHome.route) {
-            CustomerHomeScreen()
+            CustomerHomeScreen(
+                onBackClick = {navController.navigateUp()}
+            )
         }
         composable(route = Screen.RentedMoviesHome.route) {
-            RentedMoviesHomeScreen()
+            RentedMoviesHomeScreen(
+                onBackClick = {navController.navigateUp()}
+            )
         }
     }
 }

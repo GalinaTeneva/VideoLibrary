@@ -43,13 +43,14 @@ fun fakeData(): List<Customer> {
 
 @Composable
 fun CustomerHomeScreen(
+    onBackClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
                 title = "Customers",
                 showBackButton = true,
-                onBackClick = {} //TODO: Implement it!
+                onBackClick = onBackClick
             )
         }
     ) {
