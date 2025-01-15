@@ -1,0 +1,43 @@
+package bg.tu_varna.sit.si.video_library.ui
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import bg.tu_varna.sit.si.video_library.ui.customer.CustomerHomeScreen
+import bg.tu_varna.sit.si.video_library.ui.home.VideoLibraryHomeScreenWithAppBar
+import bg.tu_varna.sit.si.video_library.ui.movie.MovieHomeScreen
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMoviesHomeScreen
+
+sealed class Screen(val route: String) {
+    object VideoLibraryHome : Screen("video_library_home")
+    object MoviesHome : Screen("movies_home")
+    object CustomersHome : Screen("customer_home")
+    object RentedMoviesHome : Screen ("rented_movies_home")
+}
+
+@Composable
+fun VideoLibraryNavHost (
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = Screen.VideoLibraryHome.route,
+        modifier = modifier
+    ) {
+        composable(route = Screen.VideoLibraryHome.route) {
+            VideoLibraryHomeScreenWithAppBar()
+        }
+        composable(route = Screen.MoviesHome.route) {
+            MovieHomeScreen()
+        }
+        composable(route = Screen.CustomersHome.route) {
+            CustomerHomeScreen()
+        }
+        composable(route = Screen.RentedMoviesHome.route) {
+            RentedMoviesHomeScreen()
+        }
+    }
+}
