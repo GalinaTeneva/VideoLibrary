@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import bg.tu_varna.sit.si.video_library.ui.customer.CustomerHomeScreen
 import bg.tu_varna.sit.si.video_library.ui.home.VideoLibraryHomeScreenWithAppBar
 import bg.tu_varna.sit.si.video_library.ui.movie.MovieHomeScreen
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieEditScreen
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieInsertScreen
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMoviesHomeScreen
 
@@ -17,6 +18,7 @@ sealed class Screen(val route: String) {
     object CustomersHome : Screen("customer_home")
     object RentedMoviesHome : Screen ("rented_movies_home")
     object RentedMovieInsert : Screen ("rented_movie_insert")
+    object RentedMovieEdit : Screen ("rented_movie_edit")
 }
 
 @Composable
@@ -49,11 +51,17 @@ fun VideoLibraryNavHost (
         composable(route = Screen.RentedMoviesHome.route) {
             RentedMoviesHomeScreen(
                 onBackClick = {navController.navigateUp()},
-                onNewEntryClick = {navController.navigate(Screen.RentedMovieInsert.route)}
+                onNewEntryClick = {navController.navigate(Screen.RentedMovieInsert.route)},
+                onRecordRowClick = {navController.navigate(Screen.RentedMovieEdit.route)}
             )
         }
         composable(route = Screen.RentedMovieInsert.route) {
             RentedMovieInsertScreen(
+                onBackClick = {navController.navigateUp()}
+            )
+        }
+        composable(route = Screen.RentedMovieEdit.route) {
+            RentedMovieEditScreen(
                 onBackClick = {navController.navigateUp()}
             )
         }

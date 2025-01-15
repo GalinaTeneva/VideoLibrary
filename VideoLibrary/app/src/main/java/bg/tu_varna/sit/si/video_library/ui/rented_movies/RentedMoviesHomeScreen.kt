@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.si.video_library.ui.rented_movies
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -58,6 +59,7 @@ fun fakeData(): List<RentedMovie> = listOf(
 @Composable
 fun RentedMoviesHomeScreen(
     onBackClick: () -> Unit,
+    onRecordRowClick: (RentedMovie) -> Unit,
     onNewEntryClick: () -> Unit
 ) {
     Scaffold(
@@ -72,6 +74,7 @@ fun RentedMoviesHomeScreen(
             innerPadding ->
         RentedMovieHomeScreenBody(
             onNewEntryClick = onNewEntryClick,
+            onRecordRowClick = onRecordRowClick,
             modifier = Modifier.padding(innerPadding)
         )
 
@@ -81,6 +84,7 @@ fun RentedMoviesHomeScreen(
 @Composable
 fun RentedMovieHomeScreenBody(
     onNewEntryClick: () -> Unit,
+    onRecordRowClick: (RentedMovie) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -120,7 +124,10 @@ fun RentedMovieHomeScreenBody(
                 emptyMessage = "Sorry!\n\nThere are no rented movies yet.",
                 modifier = Modifier,
                 itemListContent = { rentedMoviesList ->
-                    RentedMoviesList(rentedMoviesList = rentedMoviesList)
+                    RentedMoviesList(
+                        rentedMoviesList = rentedMoviesList,
+                        onRecordRowClick = { onRecordRowClick(it) }
+                    )
                 }
             )
         }
@@ -130,14 +137,17 @@ fun RentedMovieHomeScreenBody(
 @Composable
 fun RentedMoviesList(
     rentedMoviesList: List<RentedMovie>,
+    onRecordRowClick: (RentedMovie) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
     ) {
-        items(rentedMoviesList) { item ->
+        items(items = rentedMoviesList, key = {it.rentalId}) { item ->
             RentedMovieRow(
-                rentedMovie = item)
+                rentedMovie = item,
+                modifier = Modifier.clickable{onRecordRowClick(item)}
+            )
         }
     }
 }
@@ -248,7 +258,8 @@ fun RentedMoviesHomeScreenPreview(){
     VideoLibraryTheme {
         RentedMoviesHomeScreen(
             onBackClick = {},
-            onNewEntryClick = {}
+            onNewEntryClick = {},
+            onRecordRowClick = {}
         )
     }
 }
