@@ -51,7 +51,7 @@ fun fakeData(): List<RentedMovie> = listOf(
 @Composable
 fun RentedMoviesHomeScreen(
     onBackClick: () -> Unit,
-    onNewEntryClick: () ->Unit
+    onNewEntryClick: () -> Unit
 ) {
     Scaffold(
         topBar = {

@@ -49,7 +49,7 @@ fun VideoLibraryNavHost (
         composable(route = Screen.RentedMoviesHome.route) {
             RentedMoviesHomeScreen(
                 onBackClick = {navController.navigateUp()},
-                onNewEntryClick = {navController.navigate(Screen.RentedMovieInsert)}
+                onNewEntryClick = {navController.navigate(Screen.RentedMovieInsert.route)}
             )
         }
         composable(route = Screen.RentedMovieInsert.route) {
