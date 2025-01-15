@@ -3,10 +3,10 @@ package bg.tu_varna.sit.si.video_library.ui.rented_movies
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -42,6 +42,21 @@ fun fakeData(): List<RentedMovie> = listOf(
         returnDate = "2024-12-23"
     )
 )
+
+@Composable
+fun RentedMoviesList(
+    rentedMoviesList: List<RentedMovie>,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        modifier = modifier
+    ) {
+        items(rentedMoviesList) { item ->
+            RentedMovieRow(
+                rentedMovie = item)
+        }
+    }
+}
 
 @Composable
 fun RentedMovieRow(
@@ -131,5 +146,13 @@ fun RentedMovieRow(
 fun RentedMovieRowPreview() {
     VideoLibraryTheme {
         RentedMovieRow(fakeData()[0])
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RentedMoviesListPreview() {
+    VideoLibraryTheme {
+        RentedMoviesList(fakeData())
     }
 }
