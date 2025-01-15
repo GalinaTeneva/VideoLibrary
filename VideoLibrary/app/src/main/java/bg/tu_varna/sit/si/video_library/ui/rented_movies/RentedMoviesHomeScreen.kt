@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
+import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreen
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 fun fakeData(): List<RentedMovie> = listOf(
@@ -42,6 +43,19 @@ fun fakeData(): List<RentedMovie> = listOf(
         returnDate = "2024-12-23"
     )
 )
+
+@Composable
+fun RentedMoviesHomeScreen(
+) {
+    GenericHomeScreen(
+        title = "Rented Movies",
+        itemList = fakeData(),
+        emptyMessage = "Sorry!\n\nThere are no rented movies yet.",
+        itemListContent = { rentedMoviesList ->
+            RentedMoviesList(rentedMoviesList = rentedMoviesList)
+        }
+    )
+}
 
 @Composable
 fun RentedMoviesList(
