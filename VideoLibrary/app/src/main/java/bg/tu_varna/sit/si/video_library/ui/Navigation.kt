@@ -28,7 +28,11 @@ fun VideoLibraryNavHost (
         modifier = modifier
     ) {
         composable(route = Screen.VideoLibraryHome.route) {
-            VideoLibraryHomeScreenWithAppBar()
+            VideoLibraryHomeScreenWithAppBar(
+                onNavigateToMovies = {navController.navigate(Screen.MoviesHome.route)},
+                onNavigateToCustomers = {navController.navigate(Screen.CustomersHome.route)},
+                onNavigateToRentedMovies = {navController.navigate(Screen.RentedMoviesHome.route)}
+            )
         }
         composable(route = Screen.MoviesHome.route) {
             MovieHomeScreen()

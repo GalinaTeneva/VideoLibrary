@@ -19,6 +19,9 @@ import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 @Composable
 fun VideoLibraryHomeScreenWithAppBar(
+    onNavigateToMovies: () -> Unit,
+    onNavigateToCustomers: () -> Unit,
+    onNavigateToRentedMovies: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -30,16 +33,24 @@ fun VideoLibraryHomeScreenWithAppBar(
         }
     ) {
         innerPadding ->
-        VideoLibraryHomeScreenBody(Modifier.padding(innerPadding))
+        VideoLibraryHomeScreenBody(
+            onNavigateToMovies = onNavigateToMovies,
+            onNavigateToCustomers = onNavigateToCustomers,
+            onNavigateToRentedMovies = onNavigateToRentedMovies,
+            Modifier.padding(innerPadding)
+        )
     }
 }
 
 @Composable
 fun VideoLibraryHomeScreenBody(
+    onNavigateToMovies: () -> Unit,
+    onNavigateToCustomers: () -> Unit,
+    onNavigateToRentedMovies: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().padding(top = 25.dp, bottom = 25.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -49,13 +60,13 @@ fun VideoLibraryHomeScreenBody(
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(bottom = 20.dp)
         )
-        Button(onClick = {}) {
+        Button(onClick = onNavigateToMovies) {
             Text(text = "MOVIES")
         }
-        Button(onClick = {}) {
+        Button(onClick = onNavigateToCustomers) {
             Text(text = "CUSTOMERS")
         }
-        Button(onClick = {}) {
+        Button(onClick = onNavigateToRentedMovies) {
             Text(text = "RENTED MOVIES")
         }
     }
@@ -65,6 +76,10 @@ fun VideoLibraryHomeScreenBody(
 @Preview(showBackground = true)
 fun VideoLibraryHomeScreenPreview() {
     VideoLibraryTheme {
-        VideoLibraryHomeScreenBody()
+        VideoLibraryHomeScreenBody(
+            onNavigateToMovies = {},
+            onNavigateToCustomers = {},
+            onNavigateToRentedMovies = {}
+        )
     }
 }
