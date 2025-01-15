@@ -28,7 +28,9 @@ fun VideoLibraryHomeScreenWithAppBar(
         topBar = {
             VideoLibraryTopAppBar(
                 title = "Video Library App",
-                modifier = modifier
+                showBackButton = false,
+                modifier = modifier,
+                onBackClick = {}
             )
         }
     ) {

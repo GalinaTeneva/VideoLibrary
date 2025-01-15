@@ -35,7 +35,9 @@ fun VideoLibraryNavHost (
             )
         }
         composable(route = Screen.MoviesHome.route) {
-            MovieHomeScreen()
+            MovieHomeScreen(
+                //navigateUp = navController.navigateUp()
+            )
         }
         composable(route = Screen.CustomersHome.route) {
             CustomerHomeScreen()

@@ -12,6 +12,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.data.entities.Customer
-import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreen
+import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
+import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 fun fakeData(): List<Customer> {
@@ -42,14 +44,25 @@ fun fakeData(): List<Customer> {
 @Composable
 fun CustomerHomeScreen(
 ) {
-    GenericHomeScreen(
-        title = "Customers",
-        itemList = fakeData(),
-        emptyMessage = "Sorry!\n\nThere are no registered customers yet.",
-        itemListContent = { customersList ->
-            CustomersList(customersList = customersList)
+    Scaffold(
+        topBar = {
+            VideoLibraryTopAppBar(
+                title = "Customers",
+                showBackButton = true,
+                onBackClick = {} //TODO: Implement it!
+            )
         }
-    )
+    ) {
+            innerPadding ->
+        GenericHomeScreenBody(
+            itemList = fakeData(),
+            emptyMessage = "Sorry!\n\nThere are no registered customers yet.",
+            modifier = Modifier.padding(innerPadding),
+            itemListContent = { customersList ->
+                CustomersList(customersList = customersList)
+            }
+        )
+    }
 }
 
 @Composable

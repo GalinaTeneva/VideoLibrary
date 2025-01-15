@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,7 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.data.entities.Movie
-import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreen
+import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
+import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 fun fakeMovieList(): List<Movie> {
@@ -43,15 +45,27 @@ fun fakeMovieList(): List<Movie> {
 
 @Composable
 fun MovieHomeScreen(
+    //navigateUp: () -> Unit
 ) {
-    GenericHomeScreen(
-        title = "Movies",
-        itemList = fakeMovieList(),
-        emptyMessage = "Sorry!\n\nThere are no available movies.",
-        itemListContent = { movieList ->
+    Scaffold(
+        topBar = {
+            VideoLibraryTopAppBar(
+                title = "Movies",
+                showBackButton = true,
+                onBackClick = {} //TODO: Implement it!
+            )
+        }
+    ) {
+            innerPadding ->
+        GenericHomeScreenBody(
+            itemList = fakeMovieList(),
+            emptyMessage = "Sorry!\n\nThere are no available movies.",
+            modifier = Modifier.padding(innerPadding),
+            itemListContent = { movieList ->
             MoviesList(movieList = movieList)
         }
-    )
+        )
+    }
 }
 
 @Composable
