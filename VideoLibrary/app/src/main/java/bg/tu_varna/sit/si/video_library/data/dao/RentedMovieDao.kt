@@ -12,13 +12,13 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface RentedMovieDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(rentedMovie: RentedMovie)
+    suspend fun insert(rentedMovie: RentedMovie)
 
     @Update
-    fun update(rentedMovie: RentedMovie)
+    suspend fun update(rentedMovie: RentedMovie)
 
     @Delete
-    fun delete(rentedMovie: RentedMovie)
+    suspend fun delete(rentedMovie: RentedMovie)
 
     @Query(
         """
