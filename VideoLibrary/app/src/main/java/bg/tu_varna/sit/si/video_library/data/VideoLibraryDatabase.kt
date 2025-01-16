@@ -32,7 +32,9 @@ abstract class VideoLibraryDatabase : RoomDatabase() {
                     context,
                     VideoLibraryDatabase::class.java,
                     "video_library_db"
-                ).build().also { Instance = it}
+                )
+                    .createFromAsset("video_library_db.db")
+                    .build().also { Instance = it}
             }
         }
     }
