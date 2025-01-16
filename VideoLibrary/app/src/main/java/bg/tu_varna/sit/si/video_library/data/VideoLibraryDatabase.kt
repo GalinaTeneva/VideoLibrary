@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import bg.tu_varna.sit.si.video_library.data.dao.CustomerDao
 import bg.tu_varna.sit.si.video_library.data.dao.MovieDao
+import bg.tu_varna.sit.si.video_library.data.dao.RentedMovieDao
 import bg.tu_varna.sit.si.video_library.data.entities.Customer
 import bg.tu_varna.sit.si.video_library.data.entities.Movie
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
@@ -18,6 +19,7 @@ import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
 abstract class VideoLibraryDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
     abstract fun customerDao(): CustomerDao
+    abstract fun rentedMovieDao(): RentedMovieDao
 
     companion object {
         @Volatile
