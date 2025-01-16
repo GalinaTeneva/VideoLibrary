@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import bg.tu_varna.sit.si.video_library.data.dao.CustomerDao
 import bg.tu_varna.sit.si.video_library.data.dao.MovieDao
 import bg.tu_varna.sit.si.video_library.data.dao.RentedMovieDao
@@ -33,7 +34,6 @@ abstract class VideoLibraryDatabase : RoomDatabase() {
                     VideoLibraryDatabase::class.java,
                     "video_library_db"
                 )
-                    .createFromAsset("video_library_db.db")
                     .build().also { Instance = it}
             }
         }
