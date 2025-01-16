@@ -223,7 +223,7 @@ fun RentedMovieRow(
                 ) {
                     Text(text = "Return Date:")
                     //Spacer(modifier = Modifier.weight(1f))
-                    Text(text = rentedMovie.returnDate)
+                    Text(text = rentedMovie.returnDate ?: "Not returned")
                 }
             }
 //            Button(
