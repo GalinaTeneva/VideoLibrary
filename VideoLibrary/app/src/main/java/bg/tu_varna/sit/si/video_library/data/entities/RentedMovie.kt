@@ -27,5 +27,5 @@ data class RentedMovie(
     val customerId: Int?,
     val movieId: Int?,
     val rentedDate: String,
-    val returnDate: String
+    val returnDate: String?
 )
