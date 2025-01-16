@@ -21,13 +21,17 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
+import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
@@ -54,14 +58,17 @@ fun fakeData(): List<RentedMovie> = listOf(
         rentedDate = "2024-12-19",
         returnDate = "2024-12-23"
     )
-)
+) //TODO: Delete fake data
 
 @Composable
 fun RentedMoviesHomeScreen(
     onBackClick: () -> Unit,
     onRecordRowClick: (RentedMovie) -> Unit,
-    onNewEntryClick: () -> Unit
+    onNewEntryClick: () -> Unit,
+    viewModel: RentedMoviesHomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    val rentedMovieHomeUiState by viewModel.rentedMovieHomeUiState.collectAsState()
+
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
@@ -73,6 +80,7 @@ fun RentedMoviesHomeScreen(
     ) {
             innerPadding ->
         RentedMovieHomeScreenBody(
+            rentedMoviesList = rentedMovieHomeUiState.rentedMoviesList,
             onNewEntryClick = onNewEntryClick,
             onRecordRowClick = onRecordRowClick,
             modifier = Modifier.padding(innerPadding)
@@ -83,6 +91,7 @@ fun RentedMoviesHomeScreen(
 
 @Composable
 fun RentedMovieHomeScreenBody(
+    rentedMoviesList: List<RentedMovie>,
     onNewEntryClick: () -> Unit,
     onRecordRowClick: (RentedMovie) -> Unit,
     modifier: Modifier = Modifier
@@ -120,7 +129,7 @@ fun RentedMovieHomeScreenBody(
                 singleLine = true
             )
             GenericHomeScreenBody(
-                itemList = fakeData(),
+                itemList = rentedMoviesList,
                 emptyMessage = "Sorry!\n\nThere are no rented movies yet.",
                 modifier = Modifier,
                 itemListContent = { rentedMoviesList ->
