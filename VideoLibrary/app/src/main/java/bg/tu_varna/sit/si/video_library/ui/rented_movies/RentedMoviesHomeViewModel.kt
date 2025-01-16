@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-class RentedMoviesNomeViewModel(rentedMovieRepository: RentedMovieRepository) : ViewModel() {
+class RentedMoviesHomeViewModel(rentedMovieRepository: RentedMovieRepository) : ViewModel() {
     val rentedMovieHomeUiState: StateFlow<RentedMovieHomeUiState> =
         rentedMovieRepository.getAllRentedMoviesStream().map {RentedMovieHomeUiState(it)}
             .stateIn(
