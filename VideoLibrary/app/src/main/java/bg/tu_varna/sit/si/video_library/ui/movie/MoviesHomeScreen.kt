@@ -13,40 +13,47 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import bg.tu_varna.sit.si.video_library.data.entities.Movie
+import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
-fun fakeMovieList(): List<Movie> {
-    return listOf(
-        Movie(
-            movieId = 1,
-            title = "Harry Potter",
-            genre = "Fantasy",
-            director = "Chris Columbus",
-            price = 3.2,
-            quantity = 3
-        ),
-        Movie(
-            movieId = 2,
-            title = "Back to the Future",
-            genre = "sci-fi",
-            director = "Robert Zemeckis",
-            price = 2.50,
-            quantity = 4
-        )
-    )
-}
+//fun fakeMovieList(): List<Movie> {
+//    return listOf(
+//        Movie(
+//            movieId = 1,
+//            title = "Harry Potter",
+//            genre = "Fantasy",
+//            director = "Chris Columbus",
+//            price = 3.2,
+//            quantity = 3
+//        ),
+//        Movie(
+//            movieId = 2,
+//            title = "Back to the Future",
+//            genre = "sci-fi",
+//            director = "Robert Zemeckis",
+//            price = 2.50,
+//            quantity = 4
+//        )
+//    )
+//}
 
 @Composable
 fun MovieHomeScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    viewModel: MoviesHomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    val moviesUiState by viewModel.movieHomeUiState.collectAsState()
+
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
@@ -58,7 +65,7 @@ fun MovieHomeScreen(
     ) {
             innerPadding ->
         GenericHomeScreenBody(
-            itemList = fakeMovieList(),
+            itemList = moviesUiState.movieList,
             emptyMessage = "Sorry!\n\nThere are no available movies.",
             modifier = Modifier.padding(innerPadding),
             itemListContent = { movieList ->
@@ -123,18 +130,18 @@ fun MovieItem(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun MovieItemPreview() {
-    VideoLibraryTheme {
-        MovieItem(fakeMovieList()[0])
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MovieListPreview() {
-    VideoLibraryTheme {
-        MoviesList(fakeMovieList())
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun MovieItemPreview() {
+//    VideoLibraryTheme {
+//        MovieItem(fakeMovieList()[0])
+//    }
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun MovieListPreview() {
+//    VideoLibraryTheme {
+//        MoviesList(fakeMovieList())
+//    }
+//}
