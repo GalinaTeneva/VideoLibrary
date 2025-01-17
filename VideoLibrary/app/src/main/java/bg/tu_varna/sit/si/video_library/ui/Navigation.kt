@@ -3,8 +3,10 @@ package bg.tu_varna.sit.si.video_library.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import bg.tu_varna.sit.si.video_library.ui.customer.CustomerHomeScreen
 import bg.tu_varna.sit.si.video_library.ui.home.VideoLibraryHomeScreenWithAppBar
 import bg.tu_varna.sit.si.video_library.ui.movie.MovieHomeScreen
@@ -18,7 +20,9 @@ sealed class Screen(val route: String) {
     object CustomersHome : Screen("customer_home")
     object RentedMoviesHome : Screen ("rented_movies_home")
     object RentedMovieInsert : Screen ("rented_movie_insert")
-    object RentedMovieEdit : Screen ("rented_movie_edit")
+    object RentedMovieEdit : Screen ("rented_movie_edit/{rentedMovieId}") {
+        fun createRoute(rentedMovieId: Int): String = "rented_movie_edit/$rentedMovieId"
+    }
 }
 
 @Composable
@@ -52,7 +56,7 @@ fun VideoLibraryNavHost (
             RentedMoviesHomeScreen(
                 onBackClick = {navController.navigateUp()},
                 onNewEntryClick = {navController.navigate(Screen.RentedMovieInsert.route)},
-                onRecordRowClick = {navController.navigate(Screen.RentedMovieEdit.route)}
+                onRecordRowClick = {rentedMovieId -> navController.navigate(Screen.RentedMovieEdit.createRoute(rentedMovieId))}
             )
         }
         composable(route = Screen.RentedMovieInsert.route) {
@@ -60,7 +64,10 @@ fun VideoLibraryNavHost (
                 onBackClick = {navController.navigateUp()}
             )
         }
-        composable(route = Screen.RentedMovieEdit.route) {
+        composable(
+            route = Screen.RentedMovieEdit.route,
+            arguments = listOf(navArgument("rentedMovieId") {type = NavType.IntType})
+        ) {
             RentedMovieEditScreen(
                 onBackClick = {navController.navigateUp()}
             )

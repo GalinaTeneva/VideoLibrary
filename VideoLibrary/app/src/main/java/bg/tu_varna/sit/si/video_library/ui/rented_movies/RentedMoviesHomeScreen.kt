@@ -63,7 +63,7 @@ fun fakeData(): List<RentedMovie> = listOf(
 @Composable
 fun RentedMoviesHomeScreen(
     onBackClick: () -> Unit,
-    onRecordRowClick: (RentedMovie) -> Unit,
+    onRecordRowClick: (Int) -> Unit,
     onNewEntryClick: () -> Unit,
     viewModel: RentedMoviesHomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -93,7 +93,7 @@ fun RentedMoviesHomeScreen(
 fun RentedMovieHomeScreenBody(
     rentedMoviesList: List<RentedMovie>,
     onNewEntryClick: () -> Unit,
-    onRecordRowClick: (RentedMovie) -> Unit,
+    onRecordRowClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -135,7 +135,7 @@ fun RentedMovieHomeScreenBody(
                 itemListContent = { rentedMoviesList ->
                     RentedMoviesList(
                         rentedMoviesList = rentedMoviesList,
-                        onRecordRowClick = { onRecordRowClick(it) }
+                        onRecordRowClick = { onRecordRowClick(it.rentalId) }
                     )
                 }
             )
