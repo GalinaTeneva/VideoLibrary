@@ -25,6 +25,7 @@ fun RentedMovieEditScreen(
     ) {
             innerPadding ->
         InputForm(
+            rentedMovieDetails = RentedMovieDetails(), //TODO: Fix the code. It has to receive edit view model
             modifier = Modifier.padding(innerPadding)
         )
     }

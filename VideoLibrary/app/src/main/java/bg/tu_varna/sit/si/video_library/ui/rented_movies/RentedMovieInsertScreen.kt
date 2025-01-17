@@ -5,13 +5,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 @Composable
 fun RentedMovieInsertScreen(
     onBackClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: RentedMovieInsertViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     Scaffold(
         topBar = {
@@ -25,6 +28,7 @@ fun RentedMovieInsertScreen(
     ) {
         innerPadding ->
         InputForm(
+            rentedMovieDetails = viewModel.rentedMovieUiState.rentedMovieDetails,
             modifier = Modifier.padding(innerPadding)
         )
     }

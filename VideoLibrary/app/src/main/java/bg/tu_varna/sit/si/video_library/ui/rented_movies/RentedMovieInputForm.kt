@@ -11,10 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 @Composable
 fun InputForm(
+    rentedMovieDetails: RentedMovieDetails,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -23,25 +25,25 @@ fun InputForm(
 
         ){
         OutlinedTextField(
-            value = "test",
+            value = rentedMovieDetails.movieId.toString(), //TODO: replace toString() with ?:
             onValueChange = {},
             label = { Text("Movie ID") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = "test",
+            value = rentedMovieDetails.customerId.toString(), //TODO: replace toString() with ?:
             onValueChange = {},
             label = { Text("Customer ID") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = "test",
+            value = rentedMovieDetails.rentedDate,
             onValueChange = {},
             label = { Text("Rented on") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = "test",
+            value = rentedMovieDetails.returnDate.toString(), //TODO: replace toString() with ?:
             onValueChange = {},
             label = { Text("Returned on") },
             modifier = Modifier.fillMaxWidth()
@@ -55,10 +57,10 @@ fun InputForm(
     }
 }
 
-@Composable
-@Preview(showBackground = true)
-fun InputFormPreview() {
-    VideoLibraryTheme {
-        InputForm()
-    }
-}
+//@Composable
+//@Preview(showBackground = true)
+//fun InputFormPreview() {
+//    VideoLibraryTheme {
+//        InputForm()
+//    }
+//}
