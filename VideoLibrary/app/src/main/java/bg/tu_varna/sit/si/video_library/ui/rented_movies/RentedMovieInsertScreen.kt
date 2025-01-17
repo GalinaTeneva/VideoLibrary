@@ -3,6 +3,8 @@ package bg.tu_varna.sit.si.video_library.ui.rented_movies
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -16,6 +18,8 @@ fun RentedMovieInsertScreen(
     modifier: Modifier = Modifier,
     viewModel: RentedMovieInsertViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    val rentedMovieInsertUiState by viewModel.rentedMovieInsertUiState.collectAsState()
+
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
@@ -28,8 +32,9 @@ fun RentedMovieInsertScreen(
     ) {
         innerPadding ->
         InputForm(
-            rentedMovieDetails = viewModel.rentedMovieUiState.rentedMovieDetails,
-            modifier = Modifier.padding(innerPadding)
+            rentedMovieUiState = rentedMovieInsertUiState,
+            modifier = Modifier.padding(innerPadding),
+            onValueChange = viewModel::updateUiState
         )
     }
 }

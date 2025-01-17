@@ -5,11 +5,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import bg.tu_varna.sit.si.video_library.data.repositories.RentedMovieRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class RentedMovieInsertViewModel(private val rentedMovieRepository: RentedMovieRepository) : ViewModel() {
-    var rentedMovieUiState by mutableStateOf(RentedMovieInsertUiState())
-    private set
+    private val _rentedMovieInsertUiState = MutableStateFlow(RentedMovieUiState())
+    val rentedMovieInsertUiState: StateFlow<RentedMovieUiState> = _rentedMovieInsertUiState.asStateFlow()
+
+    fun updateUiState(rentedMovieDetails: RentedMovieDetails) {
+        _rentedMovieInsertUiState.value = _rentedMovieInsertUiState.value.copy(rentedMovieDetails = rentedMovieDetails)
+    }
 }
 
-data class RentedMovieInsertUiState(
-    val rentedMovieDetails: RentedMovieDetails = RentedMovieDetails())

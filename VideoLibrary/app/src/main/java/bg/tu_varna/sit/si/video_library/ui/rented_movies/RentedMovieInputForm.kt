@@ -16,9 +16,12 @@ import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 @Composable
 fun InputForm(
-    rentedMovieDetails: RentedMovieDetails,
-    modifier: Modifier = Modifier
+    rentedMovieUiState: RentedMovieUiState,
+    modifier: Modifier = Modifier,
+    onValueChange: (RentedMovieDetails) -> Unit
 ) {
+    val rentedMovieDetails = rentedMovieUiState.rentedMovieDetails
+
     Column(
         modifier = modifier.padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -26,25 +29,35 @@ fun InputForm(
         ){
         OutlinedTextField(
             value = rentedMovieDetails.movieId.toString(), //TODO: replace toString() with ?:
-            onValueChange = {},
+            onValueChange = {
+                val newMovieId = it.toIntOrNull()
+                onValueChange(rentedMovieDetails.copy(movieId = newMovieId))
+            },
             label = { Text("Movie ID") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
             value = rentedMovieDetails.customerId.toString(), //TODO: replace toString() with ?:
-            onValueChange = {},
+            onValueChange = {
+                val newCustomerId = it.toIntOrNull()
+                onValueChange(rentedMovieDetails.copy(customerId = newCustomerId))
+            },
             label = { Text("Customer ID") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
             value = rentedMovieDetails.rentedDate,
-            onValueChange = {},
+            onValueChange = {
+                onValueChange(rentedMovieDetails.copy(rentedDate = it))
+            },
             label = { Text("Rented on") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
             value = rentedMovieDetails.returnDate.toString(), //TODO: replace toString() with ?:
-            onValueChange = {},
+            onValueChange = {
+                onValueChange(rentedMovieDetails.copy(returnDate = it))
+            },
             label = { Text("Returned on") },
             modifier = Modifier.fillMaxWidth()
         )
