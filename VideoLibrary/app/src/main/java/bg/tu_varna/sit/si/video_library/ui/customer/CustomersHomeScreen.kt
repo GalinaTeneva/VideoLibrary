@@ -15,36 +15,43 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import bg.tu_varna.sit.si.video_library.data.entities.Customer
+import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
-fun fakeData(): List<Customer> {
-    return listOf(
-        Customer(
-        customerId = 1,
-        personalId = "2658745896",
-        name = "Vasil Popov",
-        address = "Varna, Shipka str."
-    ),
-        Customer(
-            customerId = 2,
-            personalId = "8436958428",
-            name = "Mario Kostov",
-            address = "Varna, Plovdiv str."
-        )
-    )
-}
+//fun fakeData(): List<Customer> {
+//    return listOf(
+//        Customer(
+//        customerId = 1,
+//        personalId = "2658745896",
+//        name = "Vasil Popov",
+//        address = "Varna, Shipka str."
+//    ),
+//        Customer(
+//            customerId = 2,
+//            personalId = "8436958428",
+//            name = "Mario Kostov",
+//            address = "Varna, Plovdiv str."
+//        )
+//    )
+//}
 
 @Composable
 fun CustomerHomeScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    viewModel: CustomersHomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    val customersHomeUiState by viewModel.customerHomeUiState.collectAsState()
+
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
@@ -56,7 +63,7 @@ fun CustomerHomeScreen(
     ) {
             innerPadding ->
         GenericHomeScreenBody(
-            itemList = fakeData(),
+            itemList = customersHomeUiState.customersList,
             emptyMessage = "Sorry!\n\nThere are no registered customers yet.",
             modifier = Modifier.padding(innerPadding),
             itemListContent = { customersList ->
@@ -134,18 +141,18 @@ fun Customer(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun CustomersListPreview() {
-    VideoLibraryTheme {
-        CustomersList(fakeData())
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CustomerPreview() {
-    VideoLibraryTheme {
-        Customer(fakeData()[0])
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun CustomersListPreview() {
+//    VideoLibraryTheme {
+//        CustomersList(fakeData())
+//    }
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun CustomerPreview() {
+//    VideoLibraryTheme {
+//        Customer(fakeData()[0])
+//    }
+//}
