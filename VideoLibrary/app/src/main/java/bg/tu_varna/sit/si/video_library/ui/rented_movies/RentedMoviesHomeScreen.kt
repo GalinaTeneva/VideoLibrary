@@ -113,7 +113,8 @@ fun RentedMovieHomeScreenBody(
         }
         Card(
             border = BorderStroke(width = 1.dp, color = Color.Blue),
-            shape = RectangleShape
+            shape = RectangleShape,
+            colors = CardDefaults.cardColors(Color.White)
         ) {
             OutlinedTextField(
                 value = "",
