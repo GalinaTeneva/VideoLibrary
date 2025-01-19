@@ -12,12 +12,15 @@ import kotlinx.coroutines.flow.stateIn
 class MoviesHomeViewModel(moviesRepository: MovieRepository) : ViewModel(){
     val movieHomeUiState : StateFlow<MovieHomeUiState> =
         moviesRepository.getAllMoviesStream()
-            .map { MovieHomeUiState(it) }
+            .map { movies -> MovieHomeUiState(movieList = movies, isLoading = false) }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000L),
-                initialValue = MovieHomeUiState()
+                initialValue = MovieHomeUiState(isLoading = true)
             )
 }
 
-data class MovieHomeUiState(val movieList: List<Movie> = listOf())
+data class MovieHomeUiState(
+    val movieList: List<Movie> = listOf(),
+    val isLoading: Boolean = false
+    )

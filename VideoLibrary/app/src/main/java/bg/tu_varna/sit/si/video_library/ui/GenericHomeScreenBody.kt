@@ -14,25 +14,60 @@ import androidx.compose.ui.text.style.TextAlign
 fun <T> GenericHomeScreenBody(
     itemList: List<T>,
     emptyMessage: String,
+    isLoading: Boolean,
     modifier: Modifier = Modifier,
     itemListContent: @Composable (List<T>) -> Unit
 ) {
-    if (itemList.isEmpty()) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = modifier.fillMaxSize()
-        ) {
-            Text(
-                text = emptyMessage,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyLarge
+    when {
+        isLoading -> {
+            MessageBox(boxMessage = "Loading...")
+        }
+        itemList.isEmpty() -> {
+            MessageBox(
+                boxMessage = emptyMessage
             )
         }
-    } else {
-        Column(
-            modifier = modifier.fillMaxSize()
-        ) {
-            itemListContent(itemList)
+        else -> {
+            Column(
+                modifier = modifier.fillMaxSize()
+            ) {
+                itemListContent(itemList)
+            }
         }
+    }
+//    if (itemList.isEmpty()) {
+//        Box(
+//            contentAlignment = Alignment.Center,
+//            modifier = modifier.fillMaxSize()
+//        ) {
+//            Text(
+//                text = emptyMessage,
+//                textAlign = TextAlign.Center,
+//                style = MaterialTheme.typography.bodyLarge
+//            )
+//        }
+//    } else {
+//        Column(
+//            modifier = modifier.fillMaxSize()
+//        ) {
+//            itemListContent(itemList)
+//        }
+//    }
+}
+
+@Composable
+fun MessageBox(
+    boxMessage: String,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier.fillMaxSize()
+    ) {
+        Text(
+            text = boxMessage,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }

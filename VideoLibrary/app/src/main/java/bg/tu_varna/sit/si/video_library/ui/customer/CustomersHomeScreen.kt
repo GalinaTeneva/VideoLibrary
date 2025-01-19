@@ -68,6 +68,7 @@ fun CustomerHomeScreen(
             itemList = customersHomeUiState.customersList,
             emptyMessage = stringResource(R.string.no_customers_message),
             modifier = Modifier.padding(innerPadding),
+            isLoading = customersHomeUiState.isLoading,
             itemListContent = { customersList ->
                 CustomersList(customersList = customersList)
             }

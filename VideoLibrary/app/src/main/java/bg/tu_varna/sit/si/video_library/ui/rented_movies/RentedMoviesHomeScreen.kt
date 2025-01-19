@@ -82,7 +82,7 @@ fun RentedMoviesHomeScreen(
     ) {
             innerPadding ->
         RentedMovieHomeScreenBody(
-            rentedMoviesList = rentedMovieHomeUiState.rentedMoviesList,
+            rentedMovieHomeUiState = rentedMovieHomeUiState,
             onNewEntryClick = onNewEntryClick,
             onRecordRowClick = onRecordRowClick,
             modifier = Modifier.padding(innerPadding)
@@ -93,7 +93,7 @@ fun RentedMoviesHomeScreen(
 
 @Composable
 fun RentedMovieHomeScreenBody(
-    rentedMoviesList: List<RentedMovie>,
+    rentedMovieHomeUiState: RentedMovieHomeUiState,
     onNewEntryClick: () -> Unit,
     onRecordRowClick: (Int) -> Unit,
     modifier: Modifier = Modifier
@@ -132,8 +132,9 @@ fun RentedMovieHomeScreenBody(
                 singleLine = true
             )
             GenericHomeScreenBody(
-                itemList = rentedMoviesList,
+                itemList = rentedMovieHomeUiState.rentedMoviesList,
                 emptyMessage = stringResource(R.string.no_rented_movies_message),
+                isLoading = rentedMovieHomeUiState.isLoading,
                 modifier = Modifier,
                 itemListContent = { rentedMoviesList ->
                     RentedMoviesList(

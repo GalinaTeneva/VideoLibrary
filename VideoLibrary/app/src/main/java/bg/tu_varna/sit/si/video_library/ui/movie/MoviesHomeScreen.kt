@@ -69,6 +69,7 @@ fun MovieHomeScreen(
         GenericHomeScreenBody(
             itemList = moviesUiState.movieList,
             emptyMessage = stringResource(R.string.no_movies_message),
+            isLoading = moviesUiState.isLoading,
             modifier = Modifier.padding(innerPadding),
             itemListContent = { movieList ->
             MoviesList(movieList = movieList)

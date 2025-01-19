@@ -12,12 +12,15 @@ import kotlinx.coroutines.flow.stateIn
 class CustomersHomeViewModel(customerRepository: CustomerRepository) : ViewModel() {
     val customerHomeUiState: StateFlow<CustomerHomeUiState> =
         customerRepository.getAllCustomersStream()
-            .map { CustomerHomeUiState(it) }
+            .map { customers -> CustomerHomeUiState(customersList = customers, isLoading = false) }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000L),
-                initialValue = CustomerHomeUiState()
+                initialValue = CustomerHomeUiState(isLoading = true)
             )
 }
 
-data class CustomerHomeUiState(val customersList: List<Customer> = listOf())
+data class CustomerHomeUiState(
+    val customersList: List<Customer> = listOf(),
+    val isLoading: Boolean = false
+)

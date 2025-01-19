@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.stateIn
 
 class RentedMoviesHomeViewModel(rentedMovieRepository: RentedMovieRepository) : ViewModel() {
     val rentedMovieHomeUiState: StateFlow<RentedMovieHomeUiState> =
-        rentedMovieRepository.getAllRentedMoviesStream().map {RentedMovieHomeUiState(it)}
+        rentedMovieRepository.getAllRentedMoviesStream().map {rentedMovies -> RentedMovieHomeUiState(rentedMoviesList = rentedMovies, isLoading = false)}
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
-                initialValue = RentedMovieHomeUiState()
+                initialValue = RentedMovieHomeUiState(isLoading = true)
             )
 
     companion object {
@@ -23,4 +23,7 @@ class RentedMoviesHomeViewModel(rentedMovieRepository: RentedMovieRepository) : 
     }
 }
 
-data class RentedMovieHomeUiState(val rentedMoviesList: List<RentedMovie> = listOf())
+data class RentedMovieHomeUiState(
+    val rentedMoviesList: List<RentedMovie> = listOf(),
+    val isLoading: Boolean = false
+)
