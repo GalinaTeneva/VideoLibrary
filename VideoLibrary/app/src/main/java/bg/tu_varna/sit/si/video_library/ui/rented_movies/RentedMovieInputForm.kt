@@ -10,11 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.R
-import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
-import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 @Composable
 fun InputForm(
@@ -58,7 +55,7 @@ fun InputForm(
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = rentedMovieDetails.returnDate?.toString() ?: "",
+            value = rentedMovieDetails.returnDate ?: "",
             onValueChange = {
                 onValueChange(rentedMovieDetails.copy(returnDate = it))
             },

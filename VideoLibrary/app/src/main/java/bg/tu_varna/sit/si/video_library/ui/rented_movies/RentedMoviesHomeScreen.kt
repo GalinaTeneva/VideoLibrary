@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.room.Query
 import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
 import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
@@ -70,6 +71,7 @@ fun RentedMoviesHomeScreen(
     viewModel: RentedMoviesHomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val rentedMovieHomeUiState by viewModel.rentedMovieHomeUiState.collectAsState()
+    val searchQuery by viewModel.searchQuery.collectAsState()
 
     Scaffold(
         topBar = {
@@ -83,6 +85,8 @@ fun RentedMoviesHomeScreen(
             innerPadding ->
         RentedMovieHomeScreenBody(
             rentedMovieHomeUiState = rentedMovieHomeUiState,
+            searchQuery = searchQuery,
+            onSearchQueryChange = viewModel::updateSearchQuery,
             onNewEntryClick = onNewEntryClick,
             onRecordRowClick = onRecordRowClick,
             modifier = Modifier.padding(innerPadding)
@@ -94,6 +98,8 @@ fun RentedMoviesHomeScreen(
 @Composable
 fun RentedMovieHomeScreenBody(
     rentedMovieHomeUiState: RentedMovieHomeUiState,
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit,
     onNewEntryClick: () -> Unit,
     onRecordRowClick: (Int) -> Unit,
     modifier: Modifier = Modifier
@@ -117,8 +123,8 @@ fun RentedMovieHomeScreenBody(
             colors = CardDefaults.cardColors(Color.White)
         ) {
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = searchQuery,
+                onValueChange = onSearchQueryChange,
                 placeholder = { Text(stringResource(R.string.search)) },
                 leadingIcon = {
                     Icon(
