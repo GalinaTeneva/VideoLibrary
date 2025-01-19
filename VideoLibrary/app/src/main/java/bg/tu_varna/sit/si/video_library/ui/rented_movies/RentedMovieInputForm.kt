@@ -28,7 +28,7 @@ fun InputForm(
 
         ){
         OutlinedTextField(
-            value = rentedMovieDetails.movieId.toString(), //TODO: replace toString() with ?:
+            value = rentedMovieDetails.movieId?.toString() ?: "",
             onValueChange = {
                 val newMovieId = it.toIntOrNull()
                 onValueChange(rentedMovieDetails.copy(movieId = newMovieId))
@@ -37,7 +37,7 @@ fun InputForm(
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = rentedMovieDetails.customerId.toString(), //TODO: replace toString() with ?:
+            value = rentedMovieDetails.customerId?.toString() ?: "",
             onValueChange = {
                 val newCustomerId = it.toIntOrNull()
                 onValueChange(rentedMovieDetails.copy(customerId = newCustomerId))
@@ -54,7 +54,7 @@ fun InputForm(
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = rentedMovieDetails.returnDate.toString(), //TODO: replace toString() with ?:
+            value = rentedMovieDetails.returnDate?.toString() ?: "",
             onValueChange = {
                 onValueChange(rentedMovieDetails.copy(returnDate = it))
             },
