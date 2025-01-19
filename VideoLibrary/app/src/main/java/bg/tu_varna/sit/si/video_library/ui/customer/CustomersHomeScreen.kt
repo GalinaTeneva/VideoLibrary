@@ -18,10 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.Customer
 import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
@@ -55,7 +57,7 @@ fun CustomerHomeScreen(
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
-                title = "Customers",
+                title = stringResource(R.string.customers),
                 showBackButton = true,
                 onBackClick = onBackClick
             )
@@ -64,7 +66,7 @@ fun CustomerHomeScreen(
             innerPadding ->
         GenericHomeScreenBody(
             itemList = customersHomeUiState.customersList,
-            emptyMessage = "Sorry!\n\nThere are no registered customers yet.",
+            emptyMessage = stringResource(R.string.no_customers_message),
             modifier = Modifier.padding(innerPadding),
             itemListContent = { customersList ->
                 CustomersList(customersList = customersList)
@@ -115,7 +117,7 @@ fun Customer(
             )
             Row {
                 Text(
-                    text = "Personal ID: "
+                    text = stringResource(R.string.customer_personal_ID_txt)
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
@@ -124,7 +126,7 @@ fun Customer(
             }
             Row {
                 Text(
-                    text = "Address:"
+                    text = stringResource(R.string.customer_address_txt)
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
@@ -135,7 +137,7 @@ fun Customer(
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "Rented Movies")
+                Text(text = stringResource(R.string.rented_movies))
             }
         }
     }

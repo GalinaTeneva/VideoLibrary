@@ -26,39 +26,41 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
 import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
-fun fakeData(): List<RentedMovie> = listOf(
-    RentedMovie(
-        rentalId = 1,
-        customerId = 3,
-        movieId = 10,
-        rentedDate = "2024-12-13",
-        returnDate = "2024-12-19"
-    ),
-    RentedMovie(
-        rentalId = 2,
-        customerId = 5,
-        movieId = 12,
-        rentedDate = "2024-12-13",
-        returnDate = "2024-12-19"
-    ),
-    RentedMovie(
-        rentalId = 3,
-        customerId = 3,
-        movieId = 13,
-        rentedDate = "2024-12-19",
-        returnDate = "2024-12-23"
-    )
-) //TODO: Delete fake data
+//fun fakeData(): List<RentedMovie> = listOf(
+//    RentedMovie(
+//        rentalId = 1,
+//        customerId = 3,
+//        movieId = 10,
+//        rentedDate = "2024-12-13",
+//        returnDate = "2024-12-19"
+//    ),
+//    RentedMovie(
+//        rentalId = 2,
+//        customerId = 5,
+//        movieId = 12,
+//        rentedDate = "2024-12-13",
+//        returnDate = "2024-12-19"
+//    ),
+//    RentedMovie(
+//        rentalId = 3,
+//        customerId = 3,
+//        movieId = 13,
+//        rentedDate = "2024-12-19",
+//        returnDate = "2024-12-23"
+//    )
+//)
 
 @Composable
 fun RentedMoviesHomeScreen(
@@ -72,7 +74,7 @@ fun RentedMoviesHomeScreen(
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
-                title = "Rented Movies",
+                title = stringResource(R.string.rented_movies),
                 showBackButton = true,
                 onBackClick = onBackClick
             )
@@ -107,7 +109,7 @@ fun RentedMovieHomeScreenBody(
                 .fillMaxWidth()
                 .padding(top = 16.dp, start = 16.dp, end = 16.dp)
         ) {
-            Text(text = "New Entry")
+            Text(text = stringResource(R.string.new_record))
         }
         Card(
             border = BorderStroke(width = 1.dp, color = Color.Blue),
@@ -116,11 +118,11 @@ fun RentedMovieHomeScreenBody(
             OutlinedTextField(
                 value = "",
                 onValueChange = {},
-                placeholder = { Text("Search...") },
+                placeholder = { Text(stringResource(R.string.search)) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,
-                        contentDescription = "Search Icon"
+                        contentDescription = stringResource(R.string.search_icon)
                     )
                 },
                 modifier = Modifier
@@ -130,7 +132,7 @@ fun RentedMovieHomeScreenBody(
             )
             GenericHomeScreenBody(
                 itemList = rentedMoviesList,
-                emptyMessage = "Sorry!\n\nThere are no rented movies yet.",
+                emptyMessage = stringResource(R.string.no_rented_movies_message),
                 modifier = Modifier,
                 itemListContent = { rentedMoviesList ->
                     RentedMoviesList(
@@ -185,7 +187,7 @@ fun RentedMovieRow(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Rental ID:",
+                    text = "${stringResource(R.string.rental_id)}: ",
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.SemiBold,
                 )
@@ -203,7 +205,7 @@ fun RentedMovieRow(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Client ID: ")
+                    Text(text = "${stringResource(R.string.customer_id)}: ")
                     //Spacer(modifier = Modifier.weight(1f))
                     Text(text = rentedMovie.customerId.toString())
                 }
@@ -212,7 +214,7 @@ fun RentedMovieRow(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Movie ID:")
+                    Text(text = "${stringResource(R.string.movie_id)}: ")
                     //Spacer(modifier = Modifier.weight(1f))
                     Text(text = rentedMovie.movieId.toString())
                 }
@@ -232,7 +234,7 @@ fun RentedMovieRow(
                 ) {
                     Text(text = "Return Date:")
                     //Spacer(modifier = Modifier.weight(1f))
-                    Text(text = rentedMovie.returnDate ?: "Not returned")
+                    Text(text = rentedMovie.returnDate ?: stringResource(R.string.not_returned))
                 }
             }
 //            Button(
@@ -260,15 +262,15 @@ fun RentedMovieRow(
 //        RentedMoviesList(fakeData())
 //    }
 //}
-
-@Preview(showBackground = true)
-@Composable
-fun RentedMoviesHomeScreenPreview(){
-    VideoLibraryTheme {
-        RentedMoviesHomeScreen(
-            onBackClick = {},
-            onNewEntryClick = {},
-            onRecordRowClick = {}
-        )
-    }
-}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun RentedMoviesHomeScreenPreview(){
+//    VideoLibraryTheme {
+//        RentedMoviesHomeScreen(
+//            onBackClick = {},
+//            onNewEntryClick = {},
+//            onRecordRowClick = {}
+//        )
+//    }
+//}

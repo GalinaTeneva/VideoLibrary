@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">VideoLibrary</string>
+    <string name="welcome_message">WELCOME TO VIDEO LIBRARY</string>
+    <string name="movies">Movies</string>
+    <string name="customers">Customers</string>
+    <string name="rented_movies">Rented Movies</string>
+    <string name="new_record">New Record</string>
+    <string name="search">Search…</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="edit">Edit Record</string>
+    <string name="back">Back</string>
+    <string name="rent_movie_bar_title">Rent a movie</string>
+    <string name="edit_rented_movie_bar_title">Edit record information</string>
+    <string name="no_movies_message">Sorry!\nThere are no available movies.</string>
+    <string name="genre">Genre</string>
+    <string name="director">Director</string>
+    <string name="available">Available</string>
+    <string name="rental_price">Rental Price</string>
+    <string name="no_customers_message">Sorry!\nThere are no registered customers yet.</string>
+    <string name="customer_personal_ID_txt">Personal ID</string>
+    <string name="customer_address_txt">Address:</string>
+    <string name="no_rented_movies_message">Sorry!\nThere are no rented movies yet.</string>
+    <string name="rental_id">Rental ID</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="movie_id">Movie ID</string>
+    <string name="not_returned">Not Returned</string>
+    <string name="rented_on">Rented On</string>
+    <string name="returned_on">Returned On</string>
 </resources>

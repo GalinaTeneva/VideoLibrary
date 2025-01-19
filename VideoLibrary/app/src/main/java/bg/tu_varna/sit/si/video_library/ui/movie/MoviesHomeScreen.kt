@@ -16,10 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.Movie
 import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
@@ -57,7 +59,7 @@ fun MovieHomeScreen(
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
-                title = "Movies",
+                title = stringResource(R.string.movies),
                 showBackButton = true,
                 onBackClick = onBackClick
             )
@@ -66,7 +68,7 @@ fun MovieHomeScreen(
             innerPadding ->
         GenericHomeScreenBody(
             itemList = moviesUiState.movieList,
-            emptyMessage = "Sorry!\n\nThere are no available movies.",
+            emptyMessage = stringResource(R.string.no_movies_message),
             modifier = Modifier.padding(innerPadding),
             itemListContent = { movieList ->
             MoviesList(movieList = movieList)
@@ -116,15 +118,15 @@ fun MovieItem(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = "Genre: ${movie.genre}")
-                Text(text = "Director: ${movie.director}")
+                Text(text = "${stringResource(R.string.genre)}: ${movie.genre}")
+                Text(text = "${stringResource(R.string.director)}: ${movie.director}")
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = "Available: ${movie.quantity}")
-                Text(text = "Rental price: ${movie.price} lv")
+                Text(text = "${stringResource(R.string.available)}: ${movie.quantity}")
+                Text(text = "${stringResource(R.string.rental_price)}: ${movie.price} lv")
             }
         }
     }

@@ -9,8 +9,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
@@ -35,7 +37,7 @@ fun InputForm(
                 val newMovieId = it.toIntOrNull()
                 onValueChange(rentedMovieDetails.copy(movieId = newMovieId))
             },
-            label = { Text("Movie ID") },
+            label = { Text(stringResource(R.string.movie_id)) },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
@@ -44,7 +46,7 @@ fun InputForm(
                 val newCustomerId = it.toIntOrNull()
                 onValueChange(rentedMovieDetails.copy(customerId = newCustomerId))
             },
-            label = { Text("Customer ID") },
+            label = { Text(stringResource(R.string.customer_id)) },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
@@ -52,7 +54,7 @@ fun InputForm(
             onValueChange = {
                 onValueChange(rentedMovieDetails.copy(rentedDate = it))
             },
-            label = { Text("Rented on") },
+            label = { Text(stringResource(R.string.rented_on)) },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
@@ -60,7 +62,7 @@ fun InputForm(
             onValueChange = {
                 onValueChange(rentedMovieDetails.copy(returnDate = it))
             },
-            label = { Text("Returned on") },
+            label = { Text(stringResource(R.string.returned_on)) },
             modifier = Modifier.fillMaxWidth()
         )
         Button(

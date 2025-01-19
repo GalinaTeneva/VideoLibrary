@@ -11,9 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import bg.tu_varna.sit.si.video_library.R
+
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
@@ -27,7 +30,7 @@ fun VideoLibraryHomeScreenWithAppBar(
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
-                title = "Video Library App",
+                title = stringResource(R.string.app_name),
                 showBackButton = false,
                 modifier = modifier,
                 onBackClick = {}
@@ -57,19 +60,19 @@ fun VideoLibraryHomeScreenBody(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "WELCOME TO VIDEO LIBRARY",
+            text = stringResource(R.string.welcome_message),
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(bottom = 20.dp)
         )
         Button(onClick = onNavigateToMovies) {
-            Text(text = "MOVIES")
+            Text(text = stringResource(R.string.movies).uppercase())
         }
         Button(onClick = onNavigateToCustomers) {
-            Text(text = "CUSTOMERS")
+            Text(text = stringResource(R.string.customers).uppercase())
         }
         Button(onClick = onNavigateToRentedMovies) {
-            Text(text = "RENTED MOVIES")
+            Text(text = stringResource(R.string.rented_movies).uppercase())
         }
     }
 }

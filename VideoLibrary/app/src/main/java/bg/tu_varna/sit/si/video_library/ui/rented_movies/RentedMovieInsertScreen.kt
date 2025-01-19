@@ -7,8 +7,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
@@ -27,7 +29,7 @@ fun RentedMovieInsertScreen(
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
-                title = "Rent a movie",
+                title = stringResource((R.string.rent_movie_bar_title)),
                 showBackButton = true,
                 modifier = modifier,
                 onBackClick = onBackClick

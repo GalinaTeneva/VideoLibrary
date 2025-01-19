@@ -7,8 +7,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
@@ -26,7 +28,7 @@ fun RentedMovieEditScreen(
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
-                title = "Edit record information",
+                title = stringResource(R.string.edit_rented_movie_bar_title),
                 showBackButton = true,
                 modifier = modifier,
                 onBackClick = onBackClick
@@ -36,7 +38,7 @@ fun RentedMovieEditScreen(
             innerPadding ->
         InputForm(
             rentedMovieUiState = rentedMovieEditUiState,
-            buttonText = "Edit",
+            buttonText = stringResource(R.string.edit),
             onValueChange = viewModel::updateUiState,
             onButtonClick = {
                 coroutineScope.launch {
@@ -49,12 +51,12 @@ fun RentedMovieEditScreen(
     }
 }
 
-@Composable
-@Preview(showBackground = true)
-fun RentedMovieEditScreenPreview() {
-    VideoLibraryTheme {
-        RentedMovieEditScreen(
-            onBackClick = {}
-        )
-    }
-}
+//@Composable
+//@Preview(showBackground = true)
+//fun RentedMovieEditScreenPreview() {
+//    VideoLibraryTheme {
+//        RentedMovieEditScreen(
+//            onBackClick = {}
+//        )
+//    }
+//}
