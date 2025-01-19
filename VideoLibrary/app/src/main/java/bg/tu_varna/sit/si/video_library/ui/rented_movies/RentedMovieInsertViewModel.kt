@@ -16,5 +16,10 @@ class RentedMovieInsertViewModel(private val rentedMovieRepository: RentedMovieR
     fun updateUiState(rentedMovieDetails: RentedMovieDetails) {
         _rentedMovieInsertUiState.value = _rentedMovieInsertUiState.value.copy(rentedMovieDetails = rentedMovieDetails)
     }
+
+    suspend fun saveRentedMovie() {
+        val rentedMovie = _rentedMovieInsertUiState.value.rentedMovieDetails.toRentMovie()
+        rentedMovieRepository.insertRentedMovie(rentedMovie)
+    }
 }
 

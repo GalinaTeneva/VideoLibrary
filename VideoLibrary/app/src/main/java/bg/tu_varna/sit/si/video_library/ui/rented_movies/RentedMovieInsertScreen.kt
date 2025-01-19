@@ -5,12 +5,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun RentedMovieInsertScreen(
@@ -19,6 +21,8 @@ fun RentedMovieInsertScreen(
     viewModel: RentedMovieInsertViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val rentedMovieInsertUiState by viewModel.rentedMovieInsertUiState.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
+
 
     Scaffold(
         topBar = {
@@ -34,7 +38,11 @@ fun RentedMovieInsertScreen(
         InputForm(
             rentedMovieUiState = rentedMovieInsertUiState,
             modifier = Modifier.padding(innerPadding),
-            onValueChange = viewModel::updateUiState
+            onValueChange = viewModel::updateUiState,
+            onSaveClick = {
+                coroutineScope.launch {viewModel.saveRentedMovie()}
+                onBackClick()
+            }
         )
     }
 }

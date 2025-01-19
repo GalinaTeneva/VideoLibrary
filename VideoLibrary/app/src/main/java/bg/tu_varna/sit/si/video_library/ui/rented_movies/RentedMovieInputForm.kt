@@ -18,7 +18,8 @@ import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 fun InputForm(
     rentedMovieUiState: RentedMovieUiState,
     modifier: Modifier = Modifier,
-    onValueChange: (RentedMovieDetails) -> Unit
+    onValueChange: (RentedMovieDetails) -> Unit,
+    onSaveClick: () -> Unit
 ) {
     val rentedMovieDetails = rentedMovieUiState.rentedMovieDetails
 
@@ -62,7 +63,7 @@ fun InputForm(
             modifier = Modifier.fillMaxWidth()
         )
         Button(
-            onClick = { },
+            onClick = onSaveClick,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Save")

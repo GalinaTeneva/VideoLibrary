@@ -34,6 +34,7 @@ fun RentedMovieEditScreen(
         InputForm(
             rentedMovieUiState = rentedMovieEditUiState,
             onValueChange = viewModel::updateUiState,
+            onSaveClick = {}, //TODO: Add save funk
             modifier = Modifier.padding(innerPadding)
         )
     }
