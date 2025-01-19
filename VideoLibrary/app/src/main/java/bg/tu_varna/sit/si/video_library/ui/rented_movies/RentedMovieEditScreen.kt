@@ -36,8 +36,9 @@ fun RentedMovieEditScreen(
             innerPadding ->
         InputForm(
             rentedMovieUiState = rentedMovieEditUiState,
+            buttonText = "Edit",
             onValueChange = viewModel::updateUiState,
-            onSaveClick = {
+            onButtonClick = {
                 coroutineScope.launch {
                     viewModel.updateRentedMovie()
                     onBackClick()
