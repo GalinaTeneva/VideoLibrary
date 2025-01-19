@@ -32,4 +32,9 @@ class RentedMovieEditViewModel(
     fun updateUiState(rentedMovieDetails: RentedMovieDetails) {
         _rentedMovieEditUiState.value = _rentedMovieEditUiState.value.copy(rentedMovieDetails = rentedMovieDetails)
     }
+
+    suspend fun updateRentedMovie() {
+        val rentedMovie = _rentedMovieEditUiState.value.rentedMovieDetails.toRentMovie()
+        rentedMovieRepository.updateRentedMove(rentedMovie)
+    }
 }
