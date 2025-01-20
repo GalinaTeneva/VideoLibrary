@@ -50,6 +50,7 @@ import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 @Composable
 fun CustomerHomeScreen(
     onBackClick: () -> Unit,
+    onMenuItemClick: (Int) -> Unit,
     viewModel: CustomersHomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val customersHomeUiState by viewModel.customerHomeUiState.collectAsState()
@@ -59,7 +60,8 @@ fun CustomerHomeScreen(
             VideoLibraryTopAppBar(
                 title = stringResource(R.string.customers),
                 showBackButton = true,
-                onBackClick = onBackClick
+                onBackClick = onBackClick,
+                onMenuItemClick = onMenuItemClick
             )
         }
     ) {

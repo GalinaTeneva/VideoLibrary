@@ -33,7 +33,8 @@ fun VideoLibraryHomeScreenWithAppBar(
                 title = stringResource(R.string.app_name),
                 showBackButton = false,
                 modifier = modifier,
-                onBackClick = {}
+                onBackClick = {},
+                onMenuItemClick = {}
             )
         }
     ) {

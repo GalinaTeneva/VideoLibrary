@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun RentedMovieEditScreen(
     onBackClick: () -> Unit,
+    onMenuItemClick:(Int) ->Unit,
     modifier: Modifier = Modifier,
     viewModel: RentedMovieEditViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -31,7 +32,8 @@ fun RentedMovieEditScreen(
                 title = stringResource(R.string.edit_rented_movie_bar_title),
                 showBackButton = true,
                 modifier = modifier,
-                onBackClick = onBackClick
+                onBackClick = onBackClick,
+                onMenuItemClick = onMenuItemClick
             )
         }
     ) {

@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun RentedMovieInsertScreen(
     onBackClick: () -> Unit,
+    onMenuItemClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: RentedMovieInsertViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -32,7 +33,8 @@ fun RentedMovieInsertScreen(
                 title = stringResource((R.string.rent_movie_bar_title)),
                 showBackButton = true,
                 modifier = modifier,
-                onBackClick = onBackClick
+                onBackClick = onBackClick,
+                onMenuItemClick = onMenuItemClick
             )
         }
     ) {
@@ -56,6 +58,7 @@ fun RentedMovieInsertScreenPreview() {
     VideoLibraryTheme {
         RentedMovieInsertScreen(
             onBackClick = {},
+            onMenuItemClick = {}
         )
     }
 }

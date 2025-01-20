@@ -68,6 +68,7 @@ fun RentedMoviesHomeScreen(
     onBackClick: () -> Unit,
     onRecordRowClick: (Int) -> Unit,
     onNewEntryClick: () -> Unit,
+    onMenuItemClick: (Int) -> Unit,
     viewModel: RentedMoviesHomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val rentedMovieHomeUiState by viewModel.rentedMovieHomeUiState.collectAsState()
@@ -78,7 +79,8 @@ fun RentedMoviesHomeScreen(
             VideoLibraryTopAppBar(
                 title = stringResource(R.string.rented_movies),
                 showBackButton = true,
-                onBackClick = onBackClick
+                onBackClick = onBackClick,
+                onMenuItemClick = onMenuItemClick
             )
         }
     ) {
