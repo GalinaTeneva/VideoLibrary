@@ -52,6 +52,7 @@ fun fakeData(): List<RentedMovie> = listOf(
 @Composable
 fun RentedMovieDetailsScreen(
     onBackClick: () -> Unit,
+    onNavigateToEdit: (Int) -> Unit,
     onMenuItemClick: (Int) -> Unit,
     viewModel: RentedMovieDetailsViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -74,6 +75,7 @@ fun RentedMovieDetailsScreen(
                 viewModel.deleteRecord()
                 onBackClick()
             },
+            onEdit = onNavigateToEdit,
             modifier = Modifier.padding(innerPadding)
         )
     }
@@ -83,17 +85,19 @@ fun RentedMovieDetailsScreen(
 fun RentedMovieDetailsBody(
     rentedMovieDetailsUiState: RentedMovieUiState,
     onDelete: () -> Unit,
+    onEdit: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier.padding(16.dp)
     ){
+        val rentedMovie = rentedMovieDetailsUiState.rentedMovieDetails.toRentMovie()
         RentedMovieDetailsCard(
-            rentedMovie = rentedMovieDetailsUiState.rentedMovieDetails.toRentMovie()
+            rentedMovie = rentedMovie
         )
         Button(
-            onClick = {},
+            onClick = {onEdit(rentedMovie.rentalId)},
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text(text = stringResource(R.string.edit))
@@ -180,6 +184,6 @@ fun DetailsRow(
 @Preview(showBackground = true)
 fun RentedMovieDetailsScreenPreview() {
     VideoLibraryTheme {
-        RentedMovieDetailsScreen(onBackClick = {}, onMenuItemClick = {})
+        RentedMovieDetailsScreen(onBackClick = {}, onNavigateToEdit = {}, onMenuItemClick = {})
     }
 }

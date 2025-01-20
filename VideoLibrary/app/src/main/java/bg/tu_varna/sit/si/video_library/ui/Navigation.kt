@@ -101,6 +101,7 @@ fun VideoLibraryNavHost (
         ) {
             RentedMovieDetailsScreen(
                 onBackClick = {navController.navigateUp()},
+                onNavigateToEdit = {rentedMovieId -> navController.navigate(Screen.RentedMovieEdit.createRoute(rentedMovieId))},
                 onMenuItemClick = onMenuItemClick
             )
         }
