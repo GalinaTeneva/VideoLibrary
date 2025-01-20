@@ -3,7 +3,6 @@ package bg.tu_varna.sit.si.video_library.ui.rented_movies
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -47,14 +46,17 @@ fun fakeData(): List<RentedMovie> = listOf(
 )
 
 @Composable
-fun RentedMovieDetailsScreen() {
+fun RentedMovieDetailsScreen(
+    onBackClick: () -> Unit,
+    onMenuItemClick: (Int) -> Unit
+) {
     Scaffold(
         topBar = {
             VideoLibraryTopAppBar(
                 title = stringResource(R.string.rent_record_details),
                 showBackButton = true,
-                onBackClick = {}, //TODO:ADD NAVIGATION
-                onMenuItemClick = {} //TODO:ADD NAVIGATION
+                onBackClick = onBackClick,
+                onMenuItemClick = onMenuItemClick
             )
         }
     ) {
@@ -162,6 +164,6 @@ fun DetailsRow(
 @Preview(showBackground = true)
 fun RentedMovieDetailsScreenPreview() {
     VideoLibraryTheme {
-        RentedMovieDetailsScreen()
+        RentedMovieDetailsScreen(onBackClick = {}, onMenuItemClick = {})
     }
 }

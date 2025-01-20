@@ -2,7 +2,6 @@ package bg.tu_varna.sit.si.video_library.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -12,6 +11,7 @@ import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.ui.customer.CustomerHomeScreen
 import bg.tu_varna.sit.si.video_library.ui.home.VideoLibraryHomeScreenWithAppBar
 import bg.tu_varna.sit.si.video_library.ui.movie.MovieHomeScreen
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieDetailsScreen
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieEditScreen
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieInsertScreen
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMoviesHomeScreen
@@ -24,6 +24,9 @@ sealed class Screen(val route: String) {
     object RentedMovieInsert : Screen ("rented_movie_insert")
     object RentedMovieEdit : Screen ("rented_movie_edit/{rentedMovieId}") {
         fun createRoute(rentedMovieId: Int): String = "rented_movie_edit/$rentedMovieId"
+    }
+    object RentedMovieDetails : Screen ("rented_movie_details/{rentedMovieId}") {
+        fun createRoute(rentedMovieId: Int): String = "rented_movie_details/$rentedMovieId"
     }
 }
 
@@ -74,7 +77,7 @@ fun VideoLibraryNavHost (
                 onBackClick = {navController.navigateUp()},
                 onMenuItemClick = onMenuItemClick,
                 onNewEntryClick = {navController.navigate(Screen.RentedMovieInsert.route)},
-                onRecordRowClick = {rentedMovieId -> navController.navigate(Screen.RentedMovieEdit.createRoute(rentedMovieId))}
+                onRecordRowClick = {rentedMovieId -> navController.navigate(Screen.RentedMovieDetails.createRoute(rentedMovieId))}
             )
         }
         composable(route = Screen.RentedMovieInsert.route) {
@@ -88,6 +91,15 @@ fun VideoLibraryNavHost (
             arguments = listOf(navArgument("rentedMovieId") {type = NavType.IntType})
         ) {
             RentedMovieEditScreen(
+                onBackClick = {navController.navigateUp()},
+                onMenuItemClick = onMenuItemClick
+            )
+        }
+        composable(
+            route = Screen.RentedMovieDetails.route,
+            arguments = listOf(navArgument("rentedMovieId") {type = NavType.IntType})
+        ) {
+            RentedMovieDetailsScreen(
                 onBackClick = {navController.navigateUp()},
                 onMenuItemClick = onMenuItemClick
             )
