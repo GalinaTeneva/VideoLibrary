@@ -11,12 +11,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class RentedMovieDetailsViewModel(
     savedStateHandle: SavedStateHandle,
     private val rentedMovieRepository: RentedMovieRepository
 ) : ViewModel() {
-    
+
     private val rentedMovieId: Int = checkNotNull(savedStateHandle["rentedMovieId"])
 
     val rentedMovieDetailsUiState: StateFlow<RentedMovieUiState> =
@@ -31,7 +32,9 @@ class RentedMovieDetailsViewModel(
                 initialValue = RentedMovieUiState()
             )
 
-    suspend fun deleteRecord() {
-        rentedMovieRepository.deleteRentedMovie(rentedMovieDetailsUiState.value.rentedMovieDetails.toRentMovie())
+    fun deleteRecord() {
+        viewModelScope.launch {
+            rentedMovieRepository.deleteRentedMovie(rentedMovieDetailsUiState.value.rentedMovieDetails.toRentMovie())
+        }
     }
 }

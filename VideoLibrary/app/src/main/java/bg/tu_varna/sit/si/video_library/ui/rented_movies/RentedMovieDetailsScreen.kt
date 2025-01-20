@@ -70,6 +70,10 @@ fun RentedMovieDetailsScreen(
         innerPadding ->
         RentedMovieDetailsBody(
             rentedMovieDetailsUiState = rentedMovieDetailsUiState.value,
+            onDelete = {
+                viewModel.deleteRecord()
+                onBackClick()
+            },
             modifier = Modifier.padding(innerPadding)
         )
     }
@@ -78,6 +82,7 @@ fun RentedMovieDetailsScreen(
 @Composable
 fun RentedMovieDetailsBody(
     rentedMovieDetailsUiState: RentedMovieUiState,
+    onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -94,7 +99,7 @@ fun RentedMovieDetailsBody(
             Text(text = stringResource(R.string.edit))
         }
         Button(
-            onClick = {},
+            onClick = onDelete,
             colors = ButtonColors(Color.DarkGray, Color.White, Color.Gray, Color.Gray),
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -146,7 +151,9 @@ fun DetailsRow(
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier.fillMaxWidth().padding(start = 8.dp, end = 8.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp, end = 8.dp)
     ) {
         Text(text = label)
         Text(text = fieldValue)
