@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import bg.tu_varna.sit.si.video_library.VideoLibraryApplication
 import bg.tu_varna.sit.si.video_library.ui.customer.CustomersHomeViewModel
 import bg.tu_varna.sit.si.video_library.ui.movie.MoviesHomeViewModel
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieDetailsViewModel
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieEditViewModel
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieInsertViewModel
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMoviesHomeViewModel
@@ -40,6 +41,13 @@ object AppViewModelProvider {
 
         initializer {
             RentedMovieEditViewModel(
+                savedStateHandle = this.createSavedStateHandle(),
+                videoLibraryApplication().container.rentedMovieRepository
+            )
+        }
+
+        initializer {
+            RentedMovieDetailsViewModel(
                 savedStateHandle = this.createSavedStateHandle(),
                 videoLibraryApplication().container.rentedMovieRepository
             )
