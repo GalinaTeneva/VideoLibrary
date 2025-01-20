@@ -1,23 +1,41 @@
 package bg.tu_varna.sit.si.video_library.ui.rented_movies
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
@@ -93,6 +111,8 @@ fun RentedMovieDetailsBody(
         modifier = modifier.padding(16.dp)
     ){
         val rentedMovie = rentedMovieDetailsUiState.rentedMovieDetails.toRentMovie()
+        var isConfirmationRequired by rememberSaveable {mutableStateOf(false)}
+
         RentedMovieDetailsCard(
             rentedMovie = rentedMovie
         )
@@ -103,11 +123,21 @@ fun RentedMovieDetailsBody(
             Text(text = stringResource(R.string.edit))
         }
         Button(
-            onClick = onDelete,
+            onClick = { isConfirmationRequired = true },
             colors = ButtonColors(Color.DarkGray, Color.White, Color.Gray, Color.Gray),
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text(text = stringResource(R.string.delete))
+        }
+
+        if(isConfirmationRequired) {
+            DeleteConfirmationDialog(
+                onConfirmDelete = {
+                    isConfirmationRequired = false
+                    onDelete()
+                },
+                onCancelDelete = {isConfirmationRequired = false}
+            )
         }
     }
 }
@@ -164,6 +194,54 @@ fun DetailsRow(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun DeleteConfirmationDialog(
+    onConfirmDelete: () -> Unit,
+    onCancelDelete: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    BasicAlertDialog(
+        onDismissRequest = {},
+        modifier = modifier.background(color = Color.White)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(R.string.delete_confirmation_title),
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.align(Alignment.Start)
+            )
+            Text(
+                text = stringResource(R.string.delete_confirmation_text),
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center
+                )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                TextButton(
+                    onClick = onCancelDelete
+                ) {
+                    Text("NO")
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                TextButton(
+                    onClick = onConfirmDelete
+                ) {
+                    Text("YES")
+                }
+            }
+        }
+    }
+}
+
 //@Composable
 //@Preview(showBackground = true)
 //fun RentedMovieDetailsCardPreview() {
@@ -185,5 +263,13 @@ fun DetailsRow(
 fun RentedMovieDetailsScreenPreview() {
     VideoLibraryTheme {
         RentedMovieDetailsScreen(onBackClick = {}, onNavigateToEdit = {}, onMenuItemClick = {})
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun DeleteConfirmationDialogPreview() {
+    VideoLibraryTheme {
+        DeleteConfirmationDialog(onCancelDelete = {}, onConfirmDelete = {})
     }
 }
