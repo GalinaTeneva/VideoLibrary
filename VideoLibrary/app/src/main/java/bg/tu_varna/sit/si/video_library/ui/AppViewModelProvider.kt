@@ -35,7 +35,9 @@ object AppViewModelProvider {
 
         initializer {
             RentedMovieInsertViewModel(
-                videoLibraryApplication().container.rentedMovieRepository
+                videoLibraryApplication().container.rentedMovieRepository,
+                videoLibraryApplication().container.movieRepository,
+                videoLibraryApplication().container.customerRepository
             )
         }
 

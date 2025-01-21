@@ -7,6 +7,7 @@ interface CustomerRepository {
     fun getAllCustomersStream(): Flow<List<Customer>>
     fun getCustomerStream(id: Int): Flow<Customer>
 
+    suspend fun isCustomerExists(id: Int): Boolean
     suspend fun insertCustomer(customer: Customer)
     suspend fun updateCustomer(customer: Customer)
     suspend fun deleteCustomer(customer: Customer)
