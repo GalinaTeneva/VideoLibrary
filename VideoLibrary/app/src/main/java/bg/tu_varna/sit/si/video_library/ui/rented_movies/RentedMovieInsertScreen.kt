@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -13,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -31,7 +33,6 @@ import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RentedMovieInsertScreen(
     onBackClick: () -> Unit,
@@ -40,11 +41,9 @@ fun RentedMovieInsertScreen(
     viewModel: RentedMovieInsertViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val rentedMovieInsertUiState by viewModel.rentedMovieInsertUiState.collectAsState()
-    val feedbackMessage by viewModel.feedbackMessage.collectAsState()
-
-    val coroutineScope = rememberCoroutineScope()
+    var feedbackMessageId by remember { mutableIntStateOf(R.string.save_confirmation_message) }
     var isDialogVisible by remember { mutableStateOf(false) }
-
+    val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         topBar = {
@@ -60,40 +59,68 @@ fun RentedMovieInsertScreen(
         innerPadding ->
         InputForm(
             rentedMovieUiState = rentedMovieInsertUiState,
-            buttonText = "Save",
+            buttonText = stringResource(R.string.save),
             modifier = Modifier.padding(innerPadding),
             onValueChange = viewModel::updateUiState,
             onButtonClick = {
                 coroutineScope.launch {
-                    viewModel.saveRentedMovie()
+                    feedbackMessageId = viewModel.saveRentedMovie()
                     isDialogVisible = true
                 }
             }
         )
 
         if(isDialogVisible) {
-            BasicAlertDialog(
-                onDismissRequest = {isDialogVisible = false},
-                modifier = modifier.background(color = Color.White)
+            AlertMessageBox(
+                messageId = feedbackMessageId,
+                onDismiss = {
+                    isDialogVisible = false
+                    if(feedbackMessageId == R.string.save_confirmation_message) {
+                        onBackClick()
+                    }
+                }
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AlertMessageBox(
+    messageId: Int,
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val title = when(messageId) {
+        R.string.save_confirmation_message -> ""
+        else -> stringResource(R.string.warning)
+    }
+    BasicAlertDialog(
+        onDismissRequest = onDismiss,
+        modifier = modifier.background(color = Color.White)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.align(Alignment.Start)
+            )
+            Text(
+                text = stringResource(messageId),
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center
+            )
+            Button(
+                onClick = onDismiss,
+                modifier = Modifier.align(Alignment.End)
             ) {
-               Column(
-                   modifier = Modifier
-                       .padding(16.dp)
-                       .fillMaxWidth(),
-                   verticalArrangement = Arrangement.spacedBy(16.dp),
-                   horizontalAlignment = Alignment.CenterHorizontally
-               ) {
-                   Text(
-                       text = "Title",
-                       style = MaterialTheme.typography.headlineMedium,
-                       modifier = Modifier.align(Alignment.Start)
-                   )
-                   Text(
-                       text = feedbackMessage,
-                       style = MaterialTheme.typography.bodyMedium,
-                       textAlign = TextAlign.Center
-                   )
-               }
+                Text(text = stringResource(R.string.ok))
             }
         }
     }

@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.si.video_library.ui.rented_movies
 
 import androidx.lifecycle.ViewModel
+import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.repositories.CustomerRepository
 import bg.tu_varna.sit.si.video_library.data.repositories.MovieRepository
 import bg.tu_varna.sit.si.video_library.data.repositories.RentedMovieRepository
@@ -17,38 +18,34 @@ class RentedMovieInsertViewModel(
     private val _rentedMovieInsertUiState = MutableStateFlow(RentedMovieUiState())
     val rentedMovieInsertUiState: StateFlow<RentedMovieUiState> = _rentedMovieInsertUiState.asStateFlow()
 
-    private val _feedbackMessage = MutableStateFlow("")
-    val feedbackMessage: StateFlow<String> = _feedbackMessage.asStateFlow()
-
     fun updateUiState(rentedMovieDetails: RentedMovieDetails) {
         _rentedMovieInsertUiState.value = _rentedMovieInsertUiState.value.copy(rentedMovieDetails = rentedMovieDetails)
     }
 
-    suspend fun saveRentedMovie() {
-        val validationError = validateInput()
-        if(validationError != "") {
-            _feedbackMessage.value = validationError
-            return
+    suspend fun saveRentedMovie(): Int {
+        val validationErrorId = validateInput()
+        if(validationErrorId != null) {
+            return validationErrorId
         }
 
         val rentedMovie = _rentedMovieInsertUiState.value.rentedMovieDetails.toRentMovie()
         rentedMovieRepository.insertRentedMovie(rentedMovie)
-        _feedbackMessage.value = "You have added a new record."
+        return R.string.save_confirmation_message
     }
 
-    private suspend fun validateInput(): String {
+    private suspend fun validateInput(): Int? {
         val newRecord = _rentedMovieInsertUiState.value.rentedMovieDetails
 
         if(newRecord.customerId == null || newRecord.movieId == null || newRecord.rentedDate.isBlank() ) {
-            return "Please, fill in Customer ID, Movie ID and Rental Date!"
+            return R.string.insert_screen_empty_field
         }
         if(!movieRepository.isMovieExists(newRecord.movieId)) {
-            return "Movie ID ${newRecord.movieId} does not exists."
+            return R.string.wrong_movie_id
         }
         if(!customerRepository.isCustomerExists(newRecord.customerId)) {
-            return "Customer ID ${newRecord.customerId} does not exists."
+            return R.string.wrong_customer_id
         }
-        return ""
+        return null
     }
 }
 
