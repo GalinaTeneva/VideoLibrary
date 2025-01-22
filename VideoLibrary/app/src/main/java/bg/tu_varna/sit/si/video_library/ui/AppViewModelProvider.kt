@@ -44,7 +44,9 @@ object AppViewModelProvider {
         initializer {
             RentedMovieEditViewModel(
                 savedStateHandle = this.createSavedStateHandle(),
-                videoLibraryApplication().container.rentedMovieRepository
+                videoLibraryApplication().container.rentedMovieRepository,
+                videoLibraryApplication().container.movieRepository,
+                videoLibraryApplication().container.customerRepository
             )
         }
 
