@@ -23,29 +23,30 @@ class RentedMovieInsertViewModel(
     }
 
     suspend fun saveRentedMovie(): Int {
-        val validationErrorId = validateInput()
+        val newRecord = _rentedMovieInsertUiState.value.rentedMovieDetails
+        val validationErrorId = validateRentedMovie(newRecord, movieRepository, customerRepository)
         if(validationErrorId != null) {
             return validationErrorId
         }
 
-        val rentedMovie = _rentedMovieInsertUiState.value.rentedMovieDetails.toRentMovie()
+        val rentedMovie = newRecord.toRentMovie()
         rentedMovieRepository.insertRentedMovie(rentedMovie)
         return R.string.save_confirmation_message
     }
 
-    private suspend fun validateInput(): Int? {
-        val newRecord = _rentedMovieInsertUiState.value.rentedMovieDetails
-
-        if(newRecord.customerId == null || newRecord.movieId == null || newRecord.rentedDate.isBlank() ) {
-            return R.string.insert_screen_empty_field
-        }
-        if(!movieRepository.isMovieExists(newRecord.movieId)) {
-            return R.string.wrong_movie_id
-        }
-        if(!customerRepository.isCustomerExists(newRecord.customerId)) {
-            return R.string.wrong_customer_id
-        }
-        return null
-    }
+//    private suspend fun validateInput(): Int? {
+//        val newRecord = _rentedMovieInsertUiState.value.rentedMovieDetails
+//
+//        if(newRecord.customerId == null || newRecord.movieId == null || newRecord.rentedDate.isBlank() ) {
+//            return R.string.screen_empty_field
+//        }
+//        if(!movieRepository.isMovieExists(newRecord.movieId)) {
+//            return R.string.wrong_movie_id
+//        }
+//        if(!customerRepository.isCustomerExists(newRecord.customerId)) {
+//            return R.string.wrong_customer_id
+//        }
+//        return null
+//    }
 }
 

@@ -21,7 +21,7 @@
     <string name="delete_confirmation_title">Delete Confirmation</string>
     <string name="delete_confirmation_text">Are you sure you want to delete?</string>
     <string name="save_confirmation_message">You have added a new record.</string>
-    <string name="insert_screen_empty_field">Please, fill in Customer ID, Movie ID and Rental Date!</string>
+    <string name="screen_empty_field">Please, fill in Customer ID, Movie ID and Rental Date!</string>
     <string name="wrong_customer_id">The provided Customer ID is not valid.</string>
     <string name="wrong_movie_id">The provided Movie ID is not valid.</string>
     <string name="genre">Genre</string>
