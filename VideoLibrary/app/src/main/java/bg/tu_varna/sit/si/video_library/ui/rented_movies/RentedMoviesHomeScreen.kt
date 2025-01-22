@@ -147,6 +147,7 @@ fun RentedMovieHomeScreenBody(
                 itemListContent = { rentedMoviesList ->
                     RentedMoviesList(
                         rentedMoviesList = rentedMoviesList,
+                        messageId = rentedMovieHomeUiState.messageId,
                         onRecordRowClick = { onRecordRowClick(it.rentalId) }
                     )
                 }
@@ -158,9 +159,18 @@ fun RentedMovieHomeScreenBody(
 @Composable
 fun RentedMoviesList(
     rentedMoviesList: List<RentedMovie>,
+    messageId: Int?,
     onRecordRowClick: (RentedMovie) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    if(rentedMoviesList.isEmpty() && messageId != null) {
+        Text(
+            text = stringResource(messageId),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.error,
+            modifier = Modifier.padding(top = 8.dp)
+        )
+    }
     LazyColumn(
         modifier = modifier
     ) {
@@ -233,7 +243,7 @@ fun RentedMovieRow(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Rental Date:")
+                    Text(text = "Rental Date:") //TODO: Move this string to strings.xml
                     //Spacer(modifier = Modifier.weight(1f))
                     Text(text = rentedMovie.rentedDate)
                 }
@@ -242,7 +252,7 @@ fun RentedMovieRow(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Return Date:")
+                    Text(text = "Return Date:") //TODO: Move this string to strings.xml
                     //Spacer(modifier = Modifier.weight(1f))
                     Text(text = rentedMovie.returnDate ?: stringResource(R.string.not_returned))
                 }

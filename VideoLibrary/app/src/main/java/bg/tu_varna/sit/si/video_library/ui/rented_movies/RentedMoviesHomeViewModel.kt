@@ -2,15 +2,14 @@ package bg.tu_varna.sit.si.video_library.ui.rented_movies
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Query
+import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
 import bg.tu_varna.sit.si.video_library.data.repositories.RentedMovieRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
@@ -18,18 +17,36 @@ class RentedMoviesHomeViewModel(rentedMovieRepository: RentedMovieRepository) : 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     val rentedMovieHomeUiState: StateFlow<RentedMovieHomeUiState> =
         searchQuery
-            .flatMapLatest { query ->
+            .map{ query ->
                 val id = query.toIntOrNull()
-                if(id!= null) {
-                    rentedMovieRepository.getRentedMovieStream(id).map { listOf(it) }
-                } else {
-                    rentedMovieRepository.getAllRentedMoviesStream()
+                when {
+                    id == null -> {
+                        RentedMovieHomeUiState(
+                            rentedMoviesList = rentedMovieRepository.getAllRentedMoviesStream()
+                                .firstOrNull() ?: emptyList(),
+                            isLoading = false,
+                            messageId = null
+                        )
+                    }
+                    rentedMovieRepository.isRentedMovieExists(id) -> {
+                        val rentedMovie = rentedMovieRepository.getRentedMovieStream(id).firstOrNull()
+                        RentedMovieHomeUiState(
+                            rentedMoviesList = rentedMovie?.let { listOf(it) } ?: emptyList(),
+                            isLoading = false,
+                            messageId = null
+                        )
+                    }
+                    else -> {
+                        RentedMovieHomeUiState(
+                            rentedMoviesList = emptyList(),
+                            isLoading = false,
+                            messageId = R.string.no_record_found
+                        )
+                    }
                 }
             }
-            .map {rentedMovies -> RentedMovieHomeUiState(rentedMoviesList = rentedMovies, isLoading = false)}
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
@@ -47,5 +64,6 @@ class RentedMoviesHomeViewModel(rentedMovieRepository: RentedMovieRepository) : 
 
 data class RentedMovieHomeUiState(
     val rentedMoviesList: List<RentedMovie> = listOf(),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val messageId: Int? = null
 )
