@@ -28,6 +28,7 @@
     <string name="wrong_movie_id">The provided Movie ID is not valid.</string>
     <string name="invalid_rented_date">Invalid Rented Date.</string>
     <string name="invalid_return_date">Invalid Return Date.</string>
+    <string name="movie_already_rented">The movie is already rented.</string>
     <string name="return_date_before_rented_date">Return Date can not be before Rented Date.</string>
     <string name="genre">Genre</string>
     <string name="director">Director</string>

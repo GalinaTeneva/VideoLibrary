@@ -3,6 +3,7 @@ package bg.tu_varna.sit.si.video_library.ui.rented_movies
 import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.repositories.CustomerRepository
 import bg.tu_varna.sit.si.video_library.data.repositories.MovieRepository
+import bg.tu_varna.sit.si.video_library.data.repositories.RentedMovieRepository
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
@@ -12,7 +13,8 @@ val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 suspend fun validateRentedMovie(
     input: RentedMovieDetails,
     movieRepository: MovieRepository,
-    customerRepository: CustomerRepository
+    customerRepository: CustomerRepository,
+    rentedMovieRepository: RentedMovieRepository
 ): Int? {
 
     //Check if the required fields are missing
@@ -45,6 +47,10 @@ suspend fun validateRentedMovie(
     //Validate CustomerID
     if(!customerRepository.isCustomerExists(input.customerId)) {
         return R.string.wrong_customer_id
+    }
+
+    if(rentedMovieRepository.isMovieRented(input.movieId)) {
+        return R.string.movie_already_rented
     }
 
     return null

@@ -36,4 +36,13 @@ interface RentedMovieDao {
         """
     )
     fun getAllRentedMovies(): Flow<List<RentedMovie>>
+
+    @Query(
+        """
+            SELECT COUNT(*)
+            FROM rentedMovies
+            WHERE movieId = :movieId AND returnDate IS NULL
+        """
+    )
+    suspend fun countActiveRentals(movieId: Int): Int
 }

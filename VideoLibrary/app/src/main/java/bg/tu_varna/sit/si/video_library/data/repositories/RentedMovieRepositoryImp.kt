@@ -12,6 +12,9 @@ class RentedMovieRepositoryImp(private val rentedMovieDao: RentedMovieDao) : Ren
     override fun getRentedMovieStream(id: Int): Flow<RentedMovie>
     = rentedMovieDao.getRentedMovie(id)
 
+    override suspend fun isMovieRented(movieId: Int): Boolean
+    = rentedMovieDao.countActiveRentals(movieId) > 0
+
     override suspend fun isRentedMovieExists(id: Int): Boolean
     = rentedMovieDao.getRentedMovie(id).firstOrNull() != null
 

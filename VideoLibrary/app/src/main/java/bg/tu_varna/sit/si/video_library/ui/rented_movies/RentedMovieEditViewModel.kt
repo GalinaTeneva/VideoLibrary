@@ -39,7 +39,7 @@ class RentedMovieEditViewModel(
 
     suspend fun updateRentedMovie(): Int {
         val input = _rentedMovieEditUiState.value.rentedMovieDetails
-        val validationErrorId = validateRentedMovie(input, movieRepository, customerRepository)
+        val validationErrorId = validateRentedMovie(input, movieRepository, customerRepository, rentedMovieRepository)
         if(validationErrorId != null) {
             return validationErrorId
         }

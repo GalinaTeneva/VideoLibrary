@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 
 object DatabaseInitializer {
-    //TODO: ADD MORE RECORDS
 
     fun initializeData(container: AppDataContainer) {
         runBlocking {
@@ -19,22 +18,22 @@ object DatabaseInitializer {
             if (rentedMovieRepository.getAllRentedMoviesStream().firstOrNull().isNullOrEmpty()) {
                 // Insert Movies
                 movieRepository.insertMovie(
-                    Movie(1, "The Shawshank Redemption", "Drama", "Frank Darabont", 3.50, 10)
+                    Movie(1, "The Shawshank Redemption", "Drama", "Frank Darabont", 3.50, 1)
                 )
                 movieRepository.insertMovie(
-                    Movie(2, "The Godfather", "Crime", "Francis Ford Coppola", 3.00, 2)
+                    Movie(2, "The Godfather", "Crime", "Francis Ford Coppola", 3.00, 1)
                 )
                 movieRepository.insertMovie(
-                    Movie(3, "The Dark Knight", "Action", "Christopher Nolan", 4.50, 3)
+                    Movie(3, "The Dark Knight", "Action", "Christopher Nolan", 4.50, 1)
                 )
                 movieRepository.insertMovie(
-                    Movie(4, "The Lion King", "Animation", "Roger Allers", 3.50, 3)
+                    Movie(4, "The Lion King", "Animation", "Roger Allers", 3.50, 1)
                 )
                 movieRepository.insertMovie(
-                    Movie(5, "Avatar", "Science Fiction", "James Cameron", 4.50, 4)
+                    Movie(5, "Avatar", "Science Fiction", "James Cameron", 4.50, 1)
                 )
                 movieRepository.insertMovie(
-                    Movie(6, "Gladiator", "Historical", "Ridley Scott", 4.00, 3)
+                    Movie(6, "Gladiator", "Historical", "Ridley Scott", 4.00, 1)
                 )
 
                 // Insert Customers
