@@ -41,8 +41,8 @@ interface RentedMovieDao {
         """
             SELECT COUNT(*)
             FROM rentedMovies
-            WHERE movieId = :movieId AND returnDate IS NULL
+            WHERE movieId = :movieId AND returnDate IS NULL AND rentalId != :excludeRentalId
         """
     )
-    suspend fun countActiveRentals(movieId: Int): Int
+    suspend fun countActiveRentalsExcluding(movieId: Int, excludeRentalId: Int?): Int
 }

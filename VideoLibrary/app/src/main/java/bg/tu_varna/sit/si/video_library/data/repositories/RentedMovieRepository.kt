@@ -7,7 +7,7 @@ interface RentedMovieRepository {
     fun getAllRentedMoviesStream(): Flow<List<RentedMovie>>
     fun getRentedMovieStream(id: Int): Flow<RentedMovie>
 
-    suspend fun isMovieRented(movieId: Int): Boolean
+    suspend fun isMovieRented(movieId: Int, excludeRentalId: Int?): Boolean
     suspend fun isRentedMovieExists(id: Int): Boolean
     suspend fun insertRentedMovie(rentedMovie: RentedMovie)
     suspend fun updateRentedMove(rentedMovie: RentedMovie)

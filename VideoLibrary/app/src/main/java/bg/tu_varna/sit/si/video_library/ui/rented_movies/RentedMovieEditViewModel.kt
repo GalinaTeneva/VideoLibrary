@@ -42,7 +42,8 @@ class RentedMovieEditViewModel(
             _rentedMovieEditUiState.value.rentedMovieDetails,
             movieRepository,
             customerRepository,
-            rentedMovieRepository
+            rentedMovieRepository,
+            _rentedMovieEditUiState.value.rentedMovieDetails.rentalId
         )
 
         if(validationErrorId != null) {
@@ -52,7 +53,7 @@ class RentedMovieEditViewModel(
         val rentedMovie = _rentedMovieEditUiState.value.rentedMovieDetails.toRentMovie()
         rentedMovieRepository.updateRentedMove(rentedMovie)
 
-        if(rentedMovie.returnDate.isNullOrBlank()) {
+        if(!rentedMovie.returnDate.isNullOrBlank()) {
             movieRepository.updateMovieQuantity(rentedMovie.movieId!!, 1)
         }
 

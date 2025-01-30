@@ -14,7 +14,8 @@ suspend fun validateRentedMovie(
     input: RentedMovieDetails,
     movieRepository: MovieRepository,
     customerRepository: CustomerRepository,
-    rentedMovieRepository: RentedMovieRepository
+    rentedMovieRepository: RentedMovieRepository,
+    excludeRentalId: Int? = null
 ): Int? {
 
     //Check if the required fields are missing
@@ -49,7 +50,7 @@ suspend fun validateRentedMovie(
         return R.string.wrong_customer_id
     }
 
-    if(rentedMovieRepository.isMovieRented(input.movieId)) {
+    if(rentedMovieRepository.isMovieRented(input.movieId, excludeRentalId)) {
         return R.string.movie_already_rented
     }
 
