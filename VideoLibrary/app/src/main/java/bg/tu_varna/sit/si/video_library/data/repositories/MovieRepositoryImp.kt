@@ -18,4 +18,12 @@ class MovieRepositoryImp(private val movieDao: MovieDao) : MovieRepository {
 
     override suspend fun deleteMovie(movie: Movie) = movieDao.delete(movie)
 
+    override suspend fun updateMovieQuantity(movieId: Int, quantityChange: Int) {
+        val movie = movieDao.getMovie(movieId).firstOrNull()
+        movie?.let {
+            val updatedQuantity = (it.quantity + quantityChange).coerceAtLeast(0)
+            movieDao.update(it.copy(quantity = updatedQuantity))
+        }
+    }
+
 }

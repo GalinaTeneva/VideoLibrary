@@ -28,7 +28,7 @@ suspend fun validateRentedMovie(
     }
 
     //Validate return date
-    if(input.returnDate != null) {
+    if(!input.returnDate.isNullOrBlank()) {
         if(!isDateFormatValid(input.returnDate)) {
             return R.string.invalid_return_date
         }

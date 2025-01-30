@@ -38,14 +38,24 @@ class RentedMovieEditViewModel(
     }
 
     suspend fun updateRentedMovie(): Int {
-        val input = _rentedMovieEditUiState.value.rentedMovieDetails
-        val validationErrorId = validateRentedMovie(input, movieRepository, customerRepository, rentedMovieRepository)
+        val validationErrorId = validateRentedMovie(
+            _rentedMovieEditUiState.value.rentedMovieDetails,
+            movieRepository,
+            customerRepository,
+            rentedMovieRepository
+        )
+
         if(validationErrorId != null) {
             return validationErrorId
         }
 
-        val rentedMovie = input.toRentMovie()
+        val rentedMovie = _rentedMovieEditUiState.value.rentedMovieDetails.toRentMovie()
         rentedMovieRepository.updateRentedMove(rentedMovie)
+
+        if(rentedMovie.returnDate.isNullOrBlank()) {
+            movieRepository.updateMovieQuantity(rentedMovie.movieId!!, 1)
+        }
+
         return R.string.edit_confirmation_message
     }
 }

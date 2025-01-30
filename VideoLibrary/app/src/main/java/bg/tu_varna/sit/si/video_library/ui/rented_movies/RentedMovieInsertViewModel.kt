@@ -23,14 +23,22 @@ class RentedMovieInsertViewModel(
     }
 
     suspend fun saveRentedMovie(): Int {
-        val input = _rentedMovieInsertUiState.value.rentedMovieDetails
-        val validationErrorId = validateRentedMovie(input, movieRepository, customerRepository, rentedMovieRepository)
+        val validationErrorId = validateRentedMovie(
+            _rentedMovieInsertUiState.value.rentedMovieDetails,
+            movieRepository,
+            customerRepository,
+            rentedMovieRepository
+        )
+
         if(validationErrorId != null) {
             return validationErrorId
         }
 
-        val rentedMovie = input.toRentMovie()
+        val rentedMovie = _rentedMovieInsertUiState.value.rentedMovieDetails.toRentMovie()
         rentedMovieRepository.insertRentedMovie(rentedMovie)
+
+        movieRepository.updateMovieQuantity(rentedMovie.movieId!!, -1)
+
         return R.string.save_confirmation_message
     }
 
