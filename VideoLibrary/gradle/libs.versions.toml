@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.2"
+agp = "8.7.3"
 kotlin = "2.0.0"
 google = "2.0.21-1.0.27"
 coreKtx = "1.15.0"
@@ -7,11 +7,11 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
-activityCompose = "1.9.3"
-composeBom = "2024.04.01"
+activityCompose = "1.10.0"
+composeBom = "2025.01.01"
 roomCompiler = "2.6.1"
 roomRuntime = "2.6.1"
-navigationCompose = "2.8.4"
+navigationCompose = "2.8.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +32,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+desugaring-lib = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.4" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
