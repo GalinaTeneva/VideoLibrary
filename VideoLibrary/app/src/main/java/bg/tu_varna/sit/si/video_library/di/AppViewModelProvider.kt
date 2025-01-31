@@ -1,17 +1,17 @@
-package bg.tu_varna.sit.si.video_library.ui
+package bg.tu_varna.sit.si.video_library.di
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import bg.tu_varna.sit.si.video_library.VideoLibraryApplication
+import bg.tu_varna.sit.si.video_library.app.VideoLibraryApplication
 import bg.tu_varna.sit.si.video_library.ui.customer.CustomersHomeViewModel
 import bg.tu_varna.sit.si.video_library.ui.movie.MoviesHomeViewModel
-import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieDetailsViewModel
-import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieEditViewModel
-import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieInsertViewModel
-import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMoviesHomeViewModel
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.details.RentedMovieDetailsViewModel
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.edit.RentedMovieEditViewModel
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.insert.RentedMovieInsertViewModel
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.home.RentedMoviesHomeViewModel
 
 object AppViewModelProvider {
     val Factory = viewModelFactory {

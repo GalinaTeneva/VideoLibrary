@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui.rented_movies
+package bg.tu_varna.sit.si.video_library.ui.rented_movies.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui.rented_movies
+package bg.tu_varna.sit.si.video_library.ui.rented_movies.insert
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -15,9 +15,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import bg.tu_varna.sit.si.video_library.R
-import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
-import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
+import bg.tu_varna.sit.si.video_library.di.AppViewModelProvider
+import bg.tu_varna.sit.si.video_library.ui.navigation.VideoLibraryTopAppBar
+import bg.tu_varna.sit.si.video_library.ui.common.InputForm
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
+import bg.tu_varna.sit.si.video_library.ui.common.AlertMessageBox
 import kotlinx.coroutines.launch
 
 @Composable

@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui
+package bg.tu_varna.sit.si.video_library.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack

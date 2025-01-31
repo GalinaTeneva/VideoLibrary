@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui
+package bg.tu_varna.sit.si.video_library.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,21 +11,21 @@ import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.ui.customer.CustomerHomeScreen
 import bg.tu_varna.sit.si.video_library.ui.home.VideoLibraryHomeScreenWithAppBar
 import bg.tu_varna.sit.si.video_library.ui.movie.MovieHomeScreen
-import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieDetailsScreen
-import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieEditScreen
-import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMovieInsertScreen
-import bg.tu_varna.sit.si.video_library.ui.rented_movies.RentedMoviesHomeScreen
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.details.RentedMovieDetailsScreen
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.edit.RentedMovieEditScreen
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.insert.RentedMovieInsertScreen
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.home.RentedMoviesHomeScreen
 
 sealed class Screen(val route: String) {
     object VideoLibraryHome : Screen("video_library_home")
     object MoviesHome : Screen("movies_home")
     object CustomersHome : Screen("customer_home")
-    object RentedMoviesHome : Screen ("rented_movies_home")
-    object RentedMovieInsert : Screen ("rented_movie_insert")
-    object RentedMovieEdit : Screen ("rented_movie_edit/{rentedMovieId}") {
+    object RentedMoviesHome : Screen("rented_movies_home")
+    object RentedMovieInsert : Screen("rented_movie_insert")
+    object RentedMovieEdit : Screen("rented_movie_edit/{rentedMovieId}") {
         fun createRoute(rentedMovieId: Int): String = "rented_movie_edit/$rentedMovieId"
     }
-    object RentedMovieDetails : Screen ("rented_movie_details/{rentedMovieId}") {
+    object RentedMovieDetails : Screen("rented_movie_details/{rentedMovieId}") {
         fun createRoute(rentedMovieId: Int): String = "rented_movie_details/$rentedMovieId"
     }
 }
@@ -77,7 +77,11 @@ fun VideoLibraryNavHost (
                 onBackClick = {navController.navigateUp()},
                 onMenuItemClick = onMenuItemClick,
                 onNewEntryClick = {navController.navigate(Screen.RentedMovieInsert.route)},
-                onRecordRowClick = {rentedMovieId -> navController.navigate(Screen.RentedMovieDetails.createRoute(rentedMovieId))}
+                onRecordRowClick = {rentedMovieId -> navController.navigate(
+                    Screen.RentedMovieDetails.createRoute(
+                        rentedMovieId
+                    )
+                )}
             )
         }
         composable(route = Screen.RentedMovieInsert.route) {
@@ -101,7 +105,11 @@ fun VideoLibraryNavHost (
         ) {
             RentedMovieDetailsScreen(
                 onBackClick = {navController.navigateUp()},
-                onNavigateToEdit = {rentedMovieId -> navController.navigate(Screen.RentedMovieEdit.createRoute(rentedMovieId))},
+                onNavigateToEdit = {rentedMovieId -> navController.navigate(
+                    Screen.RentedMovieEdit.createRoute(
+                        rentedMovieId
+                    )
+                )},
                 onMenuItemClick = onMenuItemClick
             )
         }

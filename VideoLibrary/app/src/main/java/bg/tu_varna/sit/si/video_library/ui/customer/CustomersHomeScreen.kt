@@ -20,15 +20,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.Customer
-import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
-import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
-import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
-import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
+import bg.tu_varna.sit.si.video_library.di.AppViewModelProvider
+import bg.tu_varna.sit.si.video_library.ui.common.GenericHomeScreenBody
+import bg.tu_varna.sit.si.video_library.ui.navigation.VideoLibraryTopAppBar
 
 //fun fakeData(): List<Customer> {
 //    return listOf(

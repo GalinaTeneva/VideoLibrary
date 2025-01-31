@@ -1,9 +1,10 @@
-package bg.tu_varna.sit.si.video_library.ui.rented_movies
+package bg.tu_varna.sit.si.video_library.ui.rented_movies.utils
 
 import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.repositories.CustomerRepository
 import bg.tu_varna.sit.si.video_library.data.repositories.MovieRepository
 import bg.tu_varna.sit.si.video_library.data.repositories.RentedMovieRepository
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.RentedMovieFormData
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
@@ -11,7 +12,7 @@ import java.time.format.DateTimeParseException
 val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
 suspend fun validateRentedMovie(
-    input: RentedMovieDetails,
+    input: RentedMovieFormData,
     movieRepository: MovieRepository,
     customerRepository: CustomerRepository,
     rentedMovieRepository: RentedMovieRepository,

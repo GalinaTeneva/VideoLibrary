@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui.rented_movies
+package bg.tu_varna.sit.si.video_library.ui.rented_movies.home
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -28,16 +28,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.room.Query
 import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
-import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
-import bg.tu_varna.sit.si.video_library.ui.GenericHomeScreenBody
-import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
-import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
+import bg.tu_varna.sit.si.video_library.di.AppViewModelProvider
+import bg.tu_varna.sit.si.video_library.ui.common.GenericHomeScreenBody
+import bg.tu_varna.sit.si.video_library.ui.navigation.VideoLibraryTopAppBar
 
 //fun fakeData(): List<RentedMovie> = listOf(
 //    RentedMovie(

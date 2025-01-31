@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library
+package bg.tu_varna.sit.si.video_library.app
 
 import android.app.Application
 import bg.tu_varna.sit.si.video_library.data.AppDataContainer

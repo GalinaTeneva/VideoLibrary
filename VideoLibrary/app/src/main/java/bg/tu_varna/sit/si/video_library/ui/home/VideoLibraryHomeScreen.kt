@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.R
 
-import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
+import bg.tu_varna.sit.si.video_library.ui.navigation.VideoLibraryTopAppBar
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 @Composable

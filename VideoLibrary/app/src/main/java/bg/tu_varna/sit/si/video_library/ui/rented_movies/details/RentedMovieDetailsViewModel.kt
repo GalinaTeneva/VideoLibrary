@@ -1,13 +1,14 @@
-package bg.tu_varna.sit.si.video_library.ui.rented_movies
+package bg.tu_varna.sit.si.video_library.ui.rented_movies.details
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import bg.tu_varna.sit.si.video_library.data.repositories.RentedMovieRepository
-import kotlinx.coroutines.flow.MutableStateFlow
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.RentedMovieUiState
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.toRentMovie
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.toRentedMovieFormData
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -24,7 +25,7 @@ class RentedMovieDetailsViewModel(
         rentedMovieRepository.getRentedMovieStream(rentedMovieId)
             .filterNotNull()
             .map {
-                RentedMovieUiState(rentedMovieDetails = it.toRentedMovieDetails())
+                RentedMovieUiState(rentedMovieFormData = it.toRentedMovieFormData())
             }
             .stateIn(
                 scope = viewModelScope,
@@ -34,7 +35,7 @@ class RentedMovieDetailsViewModel(
 
     fun deleteRecord() {
         viewModelScope.launch {
-            rentedMovieRepository.deleteRentedMovie(rentedMovieDetailsUiState.value.rentedMovieDetails.toRentMovie())
+            rentedMovieRepository.deleteRentedMovie(rentedMovieDetailsUiState.value.rentedMovieFormData.toRentMovie())
         }
     }
 }

@@ -1,8 +1,8 @@
-package bg.tu_varna.sit.si.video_library.ui.rented_movies
+package bg.tu_varna.sit.si.video_library.ui.rented_movies.state
 
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
 
-data class RentedMovieDetails(
+data class RentedMovieFormData(
     val rentalId: Int = 0,
     val customerId: Int? = null,
     val movieId: Int? = null,
@@ -10,7 +10,7 @@ data class RentedMovieDetails(
     val returnDate: String? = null
 )
 
-fun RentedMovieDetails.toRentMovie(): RentedMovie = RentedMovie(
+fun RentedMovieFormData.toRentMovie(): RentedMovie = RentedMovie(
     rentalId = rentalId,
     customerId = customerId,
     movieId = movieId,
@@ -18,7 +18,7 @@ fun RentedMovieDetails.toRentMovie(): RentedMovie = RentedMovie(
     returnDate = returnDate
 )
 
-fun RentedMovie.toRentedMovieDetails(): RentedMovieDetails = RentedMovieDetails(
+fun RentedMovie.toRentedMovieFormData(): RentedMovieFormData = RentedMovieFormData(
     rentalId = rentalId,
     customerId = customerId,
     movieId = movieId,

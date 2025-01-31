@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui.rented_movies
+package bg.tu_varna.sit.si.video_library.ui.rented_movies.edit
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -7,6 +7,11 @@ import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.repositories.CustomerRepository
 import bg.tu_varna.sit.si.video_library.data.repositories.MovieRepository
 import bg.tu_varna.sit.si.video_library.data.repositories.RentedMovieRepository
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.RentedMovieFormData
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.RentedMovieUiState
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.toRentMovie
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.toRentedMovieFormData
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.utils.validateRentedMovie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,30 +32,30 @@ class RentedMovieEditViewModel(
         viewModelScope.launch {
             rentedMovieRepository.getRentedMovieStream(rentedMovieId).collect { rentedMovie ->
                 _rentedMovieEditUiState.value = RentedMovieUiState(
-                    rentedMovieDetails = rentedMovie.toRentedMovieDetails()
+                    rentedMovieFormData = rentedMovie.toRentedMovieFormData()
                 )
             }
         }
     }
 
-    fun updateUiState(rentedMovieDetails: RentedMovieDetails) {
-        _rentedMovieEditUiState.value = _rentedMovieEditUiState.value.copy(rentedMovieDetails = rentedMovieDetails)
+    fun updateUiState(rentedMovieFormData: RentedMovieFormData) {
+        _rentedMovieEditUiState.value = _rentedMovieEditUiState.value.copy(rentedMovieFormData = rentedMovieFormData)
     }
 
     suspend fun updateRentedMovie(): Int {
         val validationErrorId = validateRentedMovie(
-            _rentedMovieEditUiState.value.rentedMovieDetails,
+            _rentedMovieEditUiState.value.rentedMovieFormData,
             movieRepository,
             customerRepository,
             rentedMovieRepository,
-            _rentedMovieEditUiState.value.rentedMovieDetails.rentalId
+            _rentedMovieEditUiState.value.rentedMovieFormData.rentalId
         )
 
         if(validationErrorId != null) {
             return validationErrorId
         }
 
-        val rentedMovie = _rentedMovieEditUiState.value.rentedMovieDetails.toRentMovie()
+        val rentedMovie = _rentedMovieEditUiState.value.rentedMovieFormData.toRentMovie()
         rentedMovieRepository.updateRentedMove(rentedMovie)
 
         if(!rentedMovie.returnDate.isNullOrBlank()) {

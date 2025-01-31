@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui
+package bg.tu_varna.sit.si.video_library.ui.common
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

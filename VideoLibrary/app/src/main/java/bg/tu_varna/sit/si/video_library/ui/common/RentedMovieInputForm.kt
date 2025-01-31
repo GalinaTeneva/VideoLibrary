@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui.rented_movies
+package bg.tu_varna.sit.si.video_library.ui.common
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,16 +12,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import bg.tu_varna.sit.si.video_library.R
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.RentedMovieFormData
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.RentedMovieUiState
 
 @Composable
 fun InputForm(
     rentedMovieUiState: RentedMovieUiState,
     buttonText: String,
     modifier: Modifier = Modifier,
-    onValueChange: (RentedMovieDetails) -> Unit,
+    onValueChange: (RentedMovieFormData) -> Unit,
     onButtonClick: () -> Unit
 ) {
-    val rentedMovieDetails = rentedMovieUiState.rentedMovieDetails
+    val rentedMovieDetails = rentedMovieUiState.rentedMovieFormData
 
     Column(
         modifier = modifier.padding(20.dp),

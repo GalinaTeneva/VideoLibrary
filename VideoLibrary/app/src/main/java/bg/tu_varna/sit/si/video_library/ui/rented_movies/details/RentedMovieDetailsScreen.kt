@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.si.video_library.ui.rented_movies
+package bg.tu_varna.sit.si.video_library.ui.rented_movies.details
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -7,9 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -23,24 +21,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import bg.tu_varna.sit.si.video_library.R
 import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
-import bg.tu_varna.sit.si.video_library.ui.AppViewModelProvider
-import bg.tu_varna.sit.si.video_library.ui.VideoLibraryTopAppBar
+import bg.tu_varna.sit.si.video_library.di.AppViewModelProvider
+import bg.tu_varna.sit.si.video_library.ui.navigation.VideoLibraryTopAppBar
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.RentedMovieUiState
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.toRentMovie
 import bg.tu_varna.sit.si.video_library.ui.theme.VideoLibraryTheme
 
 fun fakeData(): List<RentedMovie> = listOf(
@@ -110,7 +106,7 @@ fun RentedMovieDetailsBody(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier.padding(16.dp)
     ){
-        val rentedMovie = rentedMovieDetailsUiState.rentedMovieDetails.toRentMovie()
+        val rentedMovie = rentedMovieDetailsUiState.rentedMovieFormData.toRentMovie()
         var isConfirmationRequired by rememberSaveable {mutableStateOf(false)}
 
         RentedMovieDetailsCard(
