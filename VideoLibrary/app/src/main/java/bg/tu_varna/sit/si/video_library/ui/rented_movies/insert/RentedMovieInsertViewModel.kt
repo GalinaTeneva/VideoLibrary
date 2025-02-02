@@ -45,20 +45,5 @@ class RentedMovieInsertViewModel(
 
         return R.string.save_confirmation_message
     }
-
-//    private suspend fun validateInput(): Int? {
-//        val newRecord = _rentedMovieInsertUiState.value.rentedMovieDetails
-//
-//        if(newRecord.customerId == null || newRecord.movieId == null || newRecord.rentedDate.isBlank() ) {
-//            return R.string.screen_empty_field
-//        }
-//        if(!movieRepository.isMovieExists(newRecord.movieId)) {
-//            return R.string.wrong_movie_id
-//        }
-//        if(!customerRepository.isCustomerExists(newRecord.customerId)) {
-//            return R.string.wrong_customer_id
-//        }
-//        return null
-//    }
 }
 

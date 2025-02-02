@@ -8,9 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import bg.tu_varna.sit.si.video_library.R
-import bg.tu_varna.sit.si.video_library.ui.customer.CustomerHomeScreen
+import bg.tu_varna.sit.si.video_library.ui.customer.home.CustomerHomeScreen
 import bg.tu_varna.sit.si.video_library.ui.home.VideoLibraryHomeScreenWithAppBar
-import bg.tu_varna.sit.si.video_library.ui.movie.MovieHomeScreen
+import bg.tu_varna.sit.si.video_library.ui.movie.home.MovieHomeScreen
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.details.RentedMovieDetailsScreen
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.edit.RentedMovieEditScreen
 import bg.tu_varna.sit.si.video_library.ui.rented_movies.insert.RentedMovieInsertScreen

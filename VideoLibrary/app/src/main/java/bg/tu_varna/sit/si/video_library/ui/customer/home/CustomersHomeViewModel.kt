@@ -1,9 +1,9 @@
-package bg.tu_varna.sit.si.video_library.ui.customer
+package bg.tu_varna.sit.si.video_library.ui.customer.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import bg.tu_varna.sit.si.video_library.data.entities.Customer
 import bg.tu_varna.sit.si.video_library.data.repositories.CustomerRepository
+import bg.tu_varna.sit.si.video_library.ui.customer.state.CustomerHomeUiState
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -20,7 +20,3 @@ class CustomersHomeViewModel(customerRepository: CustomerRepository) : ViewModel
             )
 }
 
-data class CustomerHomeUiState(
-    val customersList: List<Customer> = listOf(),
-    val isLoading: Boolean = false
-)

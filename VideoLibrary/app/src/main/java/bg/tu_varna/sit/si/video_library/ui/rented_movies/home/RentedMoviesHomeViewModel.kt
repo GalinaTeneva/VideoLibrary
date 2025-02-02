@@ -3,8 +3,8 @@ package bg.tu_varna.sit.si.video_library.ui.rented_movies.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import bg.tu_varna.sit.si.video_library.R
-import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
 import bg.tu_varna.sit.si.video_library.data.repositories.RentedMovieRepository
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.RentedMovieHomeUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -61,9 +61,3 @@ class RentedMoviesHomeViewModel(rentedMovieRepository: RentedMovieRepository) : 
         _searchQuery.value = query
     }
 }
-
-data class RentedMovieHomeUiState(
-    val rentedMoviesList: List<RentedMovie> = listOf(),
-    val isLoading: Boolean = false,
-    val messageId: Int? = null
-)

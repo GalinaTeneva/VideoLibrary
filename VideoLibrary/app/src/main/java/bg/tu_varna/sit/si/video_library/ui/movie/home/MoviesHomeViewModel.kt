@@ -1,9 +1,9 @@
-package bg.tu_varna.sit.si.video_library.ui.movie
+package bg.tu_varna.sit.si.video_library.ui.movie.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import bg.tu_varna.sit.si.video_library.data.entities.Movie
 import bg.tu_varna.sit.si.video_library.data.repositories.MovieRepository
+import bg.tu_varna.sit.si.video_library.ui.movie.state.MovieHomeUiState
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -19,8 +19,3 @@ class MoviesHomeViewModel(moviesRepository: MovieRepository) : ViewModel(){
                 initialValue = MovieHomeUiState(isLoading = true)
             )
 }
-
-data class MovieHomeUiState(
-    val movieList: List<Movie> = listOf(),
-    val isLoading: Boolean = false
-    )
