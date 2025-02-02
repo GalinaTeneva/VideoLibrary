@@ -134,12 +134,12 @@ fun Customer(
                     text = customer.address
                 )
             }
-            Button(
-                onClick = {},
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = stringResource(R.string.rented_movies))
-            }
+//            Button(
+//                onClick = {},
+//                modifier = Modifier.fillMaxWidth()
+//            ) {
+//                Text(text = stringResource(R.string.rented_movies))
+//            }
         }
     }
 }

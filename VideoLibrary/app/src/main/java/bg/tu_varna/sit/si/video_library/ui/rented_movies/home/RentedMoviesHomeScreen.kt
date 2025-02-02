@@ -35,6 +35,7 @@ import bg.tu_varna.sit.si.video_library.data.entities.RentedMovie
 import bg.tu_varna.sit.si.video_library.di.AppViewModelProvider
 import bg.tu_varna.sit.si.video_library.ui.common.GenericHomeScreenBody
 import bg.tu_varna.sit.si.video_library.ui.navigation.VideoLibraryTopAppBar
+import bg.tu_varna.sit.si.video_library.ui.rented_movies.state.RentedMovieHomeUiState
 
 //fun fakeData(): List<RentedMovie> = listOf(
 //    RentedMovie(
